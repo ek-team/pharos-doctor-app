@@ -1,0 +1,545 @@
+{
+	"easycom": {
+			"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+		},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+		    "path" : "pages/index/login",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#ffffff"
+		    }
+		    
+		}
+		,
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarTextStyle":"white",
+				"navigationBarBackgroundColor":"#378EFF"
+				
+			}
+			
+		},
+		{
+            "path" : "pages/patient/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationBarTextStyle":"white",
+				"navigationBarBackgroundColor":"#378EFF"
+            }
+            
+        }
+        ,{
+            "path" : "pages/my/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#378EFF"
+				
+            }
+            
+        }
+        ,{
+            "path" : "pages/patient/dayPatient",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "今日患者管理",
+                "enablePullDownRefresh": false,
+				"navigationBarTextStyle":"white",
+				"navigationBarBackgroundColor":"#378EFF"
+				
+            }
+            
+        }
+        ,{
+            "path" : "pages/business/business",
+            "style" :                                                                                    
+            {
+                "navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
+        ,{
+            "path" : "pages/chat/chat",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
+        ,{
+            "path" : "pages/business/detail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "详情",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/chat/patientDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "患者详情",
+                "enablePullDownRefresh": false,
+				"navigationBarTextStyle":"white",
+				"navigationBarBackgroundColor":"#378EFF"
+            }
+            
+        }
+        ,{
+            "path" : "pages/patient/patientList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "患者列表",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
+        ,{
+            "path" : "pages/patient/followUp",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "随访计划",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
+        ,{
+            "path" : "pages/patient/patientDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "患者详情",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
+        ,{
+            "path" : "pages/patient/followUpDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "随访计划",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
+        ,{
+            "path" : "pages/patient/editFollowUp",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
+        ,{
+            "path" : "pages/patient/addPatient",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "添加患者",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
+        ,{
+            "path" : "pages/formInfo/addForm",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "添加表单",
+                "enablePullDownRefresh": false,
+				"navigationBarTextStyle":"white",
+				"navigationBarBackgroundColor":"#378EFF",
+				"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
+        ,{
+            "path" : "pages/formInfo/formList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "表单管理",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
+        ,{
+            "path" : "pages/patient/medicalRecord",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "病历记录",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
+        ,{
+            "path" : "pages/patient/medicalDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "病历详情",
+                "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#ffffff"
+            }
+            
+        }
+        ,{
+            "path" : "pages/chat/information",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "图文咨询",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/plant/detail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "计划节点详情",
+                "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#378EFF",
+				"navigationBarTextStyle":"white"
+				
+            }
+            
+        }
+        ,{
+            "path" : "pages/my/team",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我的团队",
+                "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#ffffff"
+            }
+            
+        }
+		,{
+		    "path" : "pages/my/mySet",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "设置",
+		        "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#ffffff"
+		    }
+		    
+		},
+		{
+		    "path" : "pages/my/myQrcode",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "我的二维码",
+		        "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#378EFF",
+				"navigationBarTextStyle":"white"
+		    }
+		    
+		},
+		{
+		    "path" : "pages/my/integralDetail",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "积分明细",
+		        "enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+		    }
+		    
+		}
+        ,{
+            "path" : "pages/plant/info",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "计划节点编辑",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
+        ,{
+            "path" : "pages/formInfo/formInfo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "选择字段",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/formInfo/inputCompont",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "单行输入框",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
+        ,{
+            "path" : "pages/formInfo/textACompont",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "多行文本框",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
+        ,{
+            "path" : "pages/formInfo/radioCompont",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "单选",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
+        ,{
+            "path" : "pages/formInfo/checkputCompont",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "复选框",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
+        ,{
+            "path" : "pages/formInfo/textCompont",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "文本",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
+        ,{
+            "path" : "pages/formInfo/imgCompont",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "图片",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
+        ,{
+            "path" : "pages/plant/allInfo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "全部计划",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
+        ,{
+            "path" : "pages/case/addCase",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
+        ,{
+            "path" : "pages/case/patientInfo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
+        ,{
+            "path" : "pages/case/Inquiries",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
+        ,{
+            "path" : "pages/plant/reportWebView",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/serve/setUp",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
+        ,{
+            "path" : "pages/serve/setUpInfo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
+        ,{
+            "path" : "pages/webView/webView",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/patient/patientGroupList/patientGroupList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "患者管理",
+                "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#ffffff"
+            }
+            
+        }
+        ,{
+            "path" : "pages/patient/patientGroupList/addGroup",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "新建分组",
+                "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#ffffff",
+				"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        },
+		{
+		    "path" : "pages/patient/patientGroupList/noGroupPatientList",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "选择",
+		        "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#ffffff"
+		    }
+		    
+		},
+		{
+		    "path" : "pages/patient/userFormList",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "患者表单列表",
+		        "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#ffffff",
+				"navigationStyle": "custom"
+		    }
+		    
+		},
+		{
+		    "path" : "pages/patient/userFormDetail",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "患者表单详情",
+		        "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#ffffff",
+				"navigationStyle": "custom"
+		    }
+		    
+		},
+		{
+		    "path" : "pages/patient/searchPatient",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "搜索",
+				"navigationBarBackgroundColor":"#ffffff",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+		    "path" : "pages/chat/myCommonWords",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "常用语",
+				"navigationBarBackgroundColor":"#ffffff",
+		        "enablePullDownRefresh": true
+		    }
+		    
+		}
+        ,{
+            "path" : "pages/systemmsg/systemmsg",
+           "style" :
+           {
+               "navigationStyle": "custom" // 隐藏系统导航栏
+           }
+            
+        },{
+		    "path" : "pages/index/register",
+		   "style" :
+		   {
+		       "navigationStyle": "custom" // 隐藏系统导航栏
+		   }
+		    
+		}
+		
+    ],
+	"tabBar": {
+		"color": "#333333",
+		"selectedColor": "#333333",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"height": "50px",
+		"fontSize": "12px",
+		"list": [
+			{
+				"text": "首页",
+				"pagePath": "pages/index/index",
+				"iconPath": "/static/images/index.png",
+				"selectedIconPath": "/static/images/index1.png"
+			},
+			{
+				"pagePath": "pages/patient/index",
+				"iconPath": "/static/images/patien.png",
+				"selectedIconPath": "/static/images/patien1.png",
+				"text": "患者管理"
+			},
+			{
+				"pagePath": "pages/my/index",
+				"iconPath": "/static/images/my.png",
+				"selectedIconPath": "/static/images/my1.png",
+				"text": "我的"
+			}
+		]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {}
+}
