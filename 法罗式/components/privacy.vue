@@ -2,7 +2,7 @@
 	<view class="mask">
 		<view class="prevacyInfos">
 			<view class="preTitle">
-				法罗适医生用户隐私协议说明
+				法罗适医生隐私协议说明
 			</view>
 			<scroll-view  scroll-y="true" class="prevacyInfo"  @scrolltolower="lower">
 				
