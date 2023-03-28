@@ -563,6 +563,12 @@ const registerUser = (data) => {//注册用户
 	  queryString: true
 	})
 }
+const logoutUser = () => {//注销医生账号
+	return service.get({
+	  url: '/user/cancel',
+	  queryString: true
+	})
+}
 
 export default {
 	login,
@@ -636,5 +642,6 @@ export default {
 	appVersionUpdate,
 	getWaittingCount,
 	doctorIsLeader,
-	registerUser
+	registerUser,
+	logoutUser
 }

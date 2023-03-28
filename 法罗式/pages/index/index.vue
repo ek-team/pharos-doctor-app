@@ -1,7 +1,7 @@
 <template>
 	<view class="flsIndex">
 		<!-- @up="upCallback" -->
-		<mescroll-body ref="mescrollRef" @init="mescrollInit" @down="downCallback">
+		<mescroll-body ref="mescrollRef" :up="upOption" @init="mescrollInit" @down="downCallback">
 			<view class="flsBg">
 				<view class="flsButton flex">
 					<!-- <input class="searchContianer" @input="clearSearchUser" v-model="inputName" />
@@ -130,7 +130,13 @@
 				detailCount: 0,
 				inputName: null,
 				waittingCount: 0,
-				searchStyle:{color:'black','font-size':'20px'}
+				searchStyle:{color:'black','font-size':'20px'},
+				upOption:{
+					use:false,
+					empty:{
+						use:true
+					}
+				}
 			}
 		},
 		onLoad() {
@@ -322,13 +328,17 @@
 						if (page.num == 1) this.noiteList = [];
 						this.noiteList = this.noiteList.concat(curPageData);
 						this.mescroll.endByPage(curPageLen, totalPage);
+						console.log('执行了 noiteList-->',this.noiteList.length)
 					} else {
-						if (page.num == 1) {
-							this.noiteList = []
-						}
-						if (this.noiteList.length == 0) {
-							this.mescroll.endByPage(0, 1);
-						}
+						// if (page.num == 1) {
+						// 	this.noiteList = []
+						// }
+						this.noiteList = []
+						this.mescroll.endByPage(0, 1);
+						console.log('执行了 noiteList-->',this.noiteList.length)
+						// if (this.noiteList.length == 0) {
+						// 	this.mescroll.endByPage(0, 1);
+						// }
 
 					}
 

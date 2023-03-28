@@ -21,10 +21,10 @@
 				<view class="login_from_name">确认密码</view>
 				<view class="login_from_fun"><input type="text" v-model="passwordAgain" password="true" placeholder="请确认密码"></view>
 			</view>
-<view class="login_from_input">
+<!-- <view class="login_from_input">
 				<view class="login_from_name">邀请码</view>
 				<view class="login_from_fun"><input type="text" v-model="invitationCode" placeholder="请输入邀请码"></view>
-			</view>
+			</view> -->
 
 			<!-- <view class="login_from_input">
 				<view class="login_from_name">邀请码</view>
@@ -63,7 +63,7 @@
 				username:'',
 				password:'',
 				passwordAgain:'',
-				invitationCode:''//默认511
+				invitationCode:'511'//默认511
 			}
 		},
 		onLoad() {},
@@ -102,13 +102,13 @@
 					})
 					return
 				}
-				if(param.deptId != '511'){
-					uni.showToast({
-						title:'邀请码不对',
-						icon:'none'
-					})
-					return
-				}
+				// if(param.deptId != '511'){
+				// 	uni.showToast({
+				// 		title:'邀请码不对',
+				// 		icon:'none'
+				// 	})
+				// 	return
+				// }
 				this.api.registerUser(param).then(res=>{
 					if(res.code ==0){
 						uni.showToast({
