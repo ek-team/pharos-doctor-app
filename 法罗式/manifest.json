@@ -2,8 +2,8 @@
     "name" : "法罗适医生",
     "appid" : "__UNI__FBC5308",
     "description" : "",
-    "versionName" : "1.4.6",
-    "versionCode" : 146,
+    "versionName" : "1.5.0",
+    "versionCode" : 150,
     "transformPx" : false,
     /* 5+App特有相关 */
     "app-plus" : {
@@ -50,6 +50,7 @@
             "ios" : {
                 "dSYMs" : false,
                 "privacyDescription" : {
+                    "NSMicrophoneUsageDescription" : "该应用需要使用你的麦克风，以便发送语音给医生",
                     "NSLocalNetworkUsageDescription" : "",
                     "NSPhotoLibraryUsageDescription" : "适用于医生上传诊断书以及聊天时选择发送图片",
                     "NSCameraUsageDescription" : "适用于使用摄像头拍照上传图片以及拍照上传诊断结果"

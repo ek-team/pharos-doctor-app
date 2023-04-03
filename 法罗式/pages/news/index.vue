@@ -15,12 +15,20 @@
 			console.log("滚动距离为：" + e.scrollTop);
 		},
 		onReady() {
+			// plus.webview.currentWebview().setStyle({ popGesture: 'hide' }) 
 		    var currentWebview = this.$scope.$getAppWebview().children()[0];
 		    currentWebview.addEventListener("loaded", function() {
 		      currentWebview.evalJS(
 		        "$(\"ul.fed-part-rows a[href*='xxx.cn']\").parent().hide();"
 		      );
 		    });
+			// plus.webview.currentWebview().addEventListener('popGesture',e=>{  
+			//                             if(e.result){  
+			//                                  // 你要做的操作  
+			// 								 console.log('监听到返回按钮')
+			//                             }  
+			//                         })
+			
 		  },
 		  onBackPress(e) {
 		    this.$scope
@@ -29,30 +37,7 @@
 		      .back();
 		    return true;
 		  }
-		// onReady() {
-		// 			var pages = getCurrentPages();
-		// 			var page = pages[pages.length - 1];
-		// 			var currentWebview = page.$getAppWebview();
-		// 			var url = currentWebview.children()[0].getURL();
-		// 			console.log('=== url ===', url);
-		// 			var wv = currentWebview.children()[0];
-		// 			wv.overrideUrlLoading({
-		// 				mode: 'reject',
-		// 				match: '.*'
-		// 			}, function(e) {
-		// 				console.log('reject url: ' + e.url);
-		// 				uni.navigateTo({
-		// 					url: `/pages/webbox/webbox?weburl=${e.url}`
-		// 				})
-		// 			});
-		// 		},
-		// 		onBackPress(e) {
-		// 			let pages = getCurrentPages()
-		// 			let page = pages[pages.length - 1];
-		// 			let currentPages = page.$getAppWebview()
-		// 			currentPages.close()
-		// 			return false
-		// 		},
+		
 	}
 </script>
 

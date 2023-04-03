@@ -56,6 +56,16 @@
 			}
 			
 		},
+		{
+			"path": "pages/news/news",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarTextStyle":"white",
+				"navigationBarBackgroundColor":"#378EFF"
+				
+			}
+			
+		},
         {
             "path" : "pages/patient/dayPatient",
             "style" :                                                                                    
@@ -514,6 +524,16 @@
 		       "navigationStyle": "custom" // 隐藏系统导航栏
 		   }
 		    
+		},
+		{
+		    "path" : "pages/news/newsDetail",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "文章详情",
+				"navigationBarBackgroundColor":"#ffffff",
+		        "enablePullDownRefresh": false
+		    }
+		    
 		}
 		// {
 		//     "path" : "pages/news/index",
@@ -550,7 +570,7 @@
 				"text": "患者管理"
 			},
 			{
-				"pagePath": "pages/news/index",
+				"pagePath": "pages/news/news",
 				"iconPath": "/static/images/icon_dia@3x.png",
 				"selectedIconPath": "/static/images/icon_dia_sel@3x.png",
 				"text": "康复资讯"
