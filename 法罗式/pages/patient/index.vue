@@ -116,10 +116,14 @@
 				// uni.navigateTo({
 				// 	url:'./addPatient'
 				// })
-				uni.showToast({
-					title:'该功能暂不支持开放！',
-					icon:"none"
+				uni.navigateTo({
+					url:'../my/myQrcode'
 				})
+				// uni.showToast({
+				// 	// title:'该功能暂不支持开放！',
+				// 	// icon:"none",
+					
+				// })
 			},
 			fromgl(){
 				uni.navigateTo({

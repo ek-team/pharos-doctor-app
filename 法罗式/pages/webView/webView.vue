@@ -1,5 +1,6 @@
 <template>
 	<view>
+		<!-- <web-view src="https://pharos3.ewj100.com/html/privacy.html"></web-view> -->
 		<web-view src="https://pharos3.ewj100.com/html/index.html"></web-view>
 	</view>
 </template>
