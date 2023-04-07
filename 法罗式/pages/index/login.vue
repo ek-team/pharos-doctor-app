@@ -20,7 +20,7 @@
 					class="changeIcon" mode=""></image>
 				同意
 			</view>
-			<text @click="isAgree = true">《法罗适隐私政策》</text>
+			<text @click="isAgree = true">《法罗适医生隐私政策》</text>
 		</view>
 		<Privacy v-if="isAgree" @agreePre="agreePre"></Privacy>
 	</view>
