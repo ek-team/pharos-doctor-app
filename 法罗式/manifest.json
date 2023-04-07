@@ -2,8 +2,8 @@
     "name" : "法罗适医生",
     "appid" : "__UNI__FBC5308",
     "description" : "",
-    "versionName" : "1.5.1",
-    "versionCode" : 151,
+    "versionName" : "1.5.3",
+    "versionCode" : 153,
     "transformPx" : false,
     /* 5+App特有相关 */
     "app-plus" : {
@@ -63,22 +63,22 @@
             },
             "icons" : {
                 "android" : {
-                    "hdpi" : "E:/wechatP/uni/faluoshi-doc-app/红橙色fls/72.png",
-                    "xhdpi" : "E:/wechatP/uni/faluoshi-doc-app/红橙色fls/96.png",
-                    "xxhdpi" : "E:/wechatP/uni/faluoshi-doc-app/红橙色fls/144.png",
-                    "xxxhdpi" : "E:/wechatP/uni/faluoshi-doc-app/红橙色fls/192.png"
+                    "hdpi" : "E:/wechatP/uni/faluoshi-doc-app/蓝绿色fls/72.png",
+                    "xhdpi" : "E:/wechatP/uni/faluoshi-doc-app/蓝绿色fls/96.png",
+                    "xxhdpi" : "E:/wechatP/uni/faluoshi-doc-app/蓝绿色fls/120.png",
+                    "xxxhdpi" : "E:/wechatP/uni/faluoshi-doc-app/蓝绿色fls/192.png"
                 },
                 "ios" : {
-                    "appstore" : "E:/wechatP/uni/faluoshi-doc-app/红橙色fls/1024.png",
+                    "appstore" : "E:/wechatP/uni/faluoshi-doc-app/蓝绿色fls/1024.png",
                     "iphone" : {
-                        "app@2x" : "E:/wechatP/uni/faluoshi-doc-app/红橙色fls/120.png",
-                        "app@3x" : "E:/wechatP/uni/faluoshi-doc-app/红橙色fls/180.png",
-                        "spotlight@2x" : "E:/wechatP/uni/faluoshi-doc-app/红橙色fls/80.png",
-                        "spotlight@3x" : "E:/wechatP/uni/faluoshi-doc-app/红橙色fls/120.png",
-                        "settings@2x" : "E:/wechatP/uni/faluoshi-doc-app/红橙色fls/58.png",
-                        "settings@3x" : "E:/wechatP/uni/faluoshi-doc-app/红橙色fls/87.png",
-                        "notification@2x" : "E:/wechatP/uni/faluoshi-doc-app/红橙色fls/40.png",
-                        "notification@3x" : "E:/wechatP/uni/faluoshi-doc-app/红橙色fls/60.png"
+                        "app@2x" : "E:/wechatP/uni/faluoshi-doc-app/蓝绿色fls/120.png",
+                        "app@3x" : "E:/wechatP/uni/faluoshi-doc-app/蓝绿色fls/180.png",
+                        "spotlight@2x" : "E:/wechatP/uni/faluoshi-doc-app/蓝绿色fls/80.png",
+                        "spotlight@3x" : "E:/wechatP/uni/faluoshi-doc-app/蓝绿色fls/120.png",
+                        "settings@2x" : "E:/wechatP/uni/faluoshi-doc-app/蓝绿色fls/58.png",
+                        "settings@3x" : "E:/wechatP/uni/faluoshi-doc-app/蓝绿色fls/87.png",
+                        "notification@2x" : "E:/wechatP/uni/faluoshi-doc-app/蓝绿色fls/40.png",
+                        "notification@3x" : "E:/wechatP/uni/faluoshi-doc-app/蓝绿色fls/60.png"
                     }
                 }
             },

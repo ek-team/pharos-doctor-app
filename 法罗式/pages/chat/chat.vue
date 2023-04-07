@@ -68,7 +68,7 @@
 								</view>
 
 								<!--图片信息作为展示-->
-								<view class="content" v-if="item.msgType=='MESSAGE_PIC'">
+								<view class="content" style="background: white;" v-if="item.msgType=='MESSAGE_PIC'">
 
 									<image :src="item.url" mode="" class="mesImg" @click="watchImg(item.url)"></image>
 								</view>
