@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<view class="title">{{contentTitle}}</view>
-		<view style="margin-left: 20rpx;margin-top: 40rpx;">法罗适  {{date}}</view>
+		<view v-if="isShow" style="margin-left: 20rpx;margin-top: 40rpx;">法罗适  {{date}}</view>
 		<image style="width: 100%;height: 400rpx;margin-top: 40rpx;" :src="imgPath"></image>
 		<view class="textContent">{{textContent}}</view>
 	</view>
@@ -14,7 +14,8 @@
 				contentTitle:'',
 				textContent:'',
 				imgPath:'',
-				date:''
+				date:'',
+				isShow:false
 			}
 		},
 		methods: {

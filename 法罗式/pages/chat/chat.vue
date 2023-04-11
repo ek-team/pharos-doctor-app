@@ -56,6 +56,11 @@
 									<image src="/static/images/icon_for@2x.png" mode="" class="formImg" ></image>
 									<view class="formTitle">{{item.form? item.form.title:''}}</view>
 								</view>
+								<!--患教文章-->
+								<view class="content videoContent formContent" v-if="item.msgType=='ARTICLE'" @click="toFormDetail(item,2)">
+									<image src="/static/images/icon_for@2x.png" mode="" class="formImg" ></image>
+									<view class="formTitle">{{item.form? item.form.title:''}}</view>
+								</view>
 
 								<!-- 语音信息 -->
 								<view class="content videoContent" @click="voiceActive(item.url,index,item.id,item.fromUid)" v-if="item.msgType=='VIDEO'">
@@ -73,13 +78,13 @@
 									<image :src="item.url" mode="" class="mesImg" @click="watchImg(item.url)"></image>
 								</view>
 								<!-- 视频信息 -->
-								<u-parse class="content requesContent" v-if="item.msgType=='VIDEO_URL'" :pauseVideo="true" :content="item.content" >
+								<u-parse class="content requesContent" style="background: white;" v-if="item.msgType=='VIDEO_URL'" :pauseVideo="true" :content="item.content" >
 								</u-parse>
 								<!-- <view class="content mpContainer" v-if="item.msgType=='VIDEO_URL'">
 									<video :src="item.url" class="mpContent" enable-danmu danmu-btn controls>
 
 									</video>
-								</view>     -->
+								</view>    -->
 								<!-- 随访消息 -->
 								<view class="content requesContent" v-if="item.msgType=='FOLLOW_UP_PLAN'" @click="suifnagplant(item)">
 									<view class="">
@@ -170,7 +175,7 @@
 					发送
 				</view>
 			</view>
-			<view class="resourcesList flexA" v-if="showImgs">
+			<view class="resourcesList" v-if="showImgs">
 				<view class="" @click="selctImg" style="margin-right:48rpx;">
 					<view class="pohoeImg flexCC">
 						<image src="/static/images/icon_pic@2x.png" mode="" class="pohoeImgs"></image>
@@ -180,7 +185,7 @@
 						相册
 					</view>
 				</view>
-				<!-- <view class="" @click="selectVedio" style="margin-right:48rpx;">
+				<view class="" @click="selectVedio" style="margin-right:48rpx;">
 					<view class="pohoeImg flexCC">
 						<image src="/static/images/icon_php@2x.png" mode="" class="pohoeImgs"></image>
 					</view>
@@ -188,7 +193,7 @@
 					<view class="">
 						视频
 					</view>
-				</view> -->
+				</view>
 				<view class="" @click="toMyCommonWords" style="margin-right:48rpx;">
 					<view class="pohoeImg flexCC">
 						<image src="/static/images/common_words1.png" mode="" class="pohoeImgs"></image>
@@ -209,7 +214,7 @@
 					</view>
 				</view>
 
-				<view class="" @click="tosendForm">
+				<view class="" @click="tosendForm" style="margin-right:48rpx;">
 					<view class="pohoeImg flexCC">
 						<image src="/static/images/send_form_icon.png" mode="" class="pohoeImgs"></image>
 					</view>
@@ -218,8 +223,30 @@
 						表单推送
 					</view>
 				</view>
-
+				<view class="" @click="tosendArticle" style="margin-right:48rpx;">
+					<view class="pohoeImg flexCC">
+						<image src="/static/images/send_form_icon.png" mode="" class="pohoeImgs"></image>
+					</view>
+				
+					<view class="">
+						患教文章
+					</view>
+				</view>
 			</view>
+			<!-- <view class="resourcesList flexA" style="height: 150rpx; margin-top:0rpx;" v-if="showImgs">
+				
+				<view class="" @click="tosendArticle">
+					<view class="pohoeImg flexCC">
+						<image src="/static/images/send_form_icon.png" mode="" class="pohoeImgs"></image>
+					</view>
+				
+					<view class="">
+						患教文章
+					</view>
+				</view>
+				
+
+			</view> -->
 		</view>
 		<u-popup :show="chatMenuType" mode="top"  @close="chatMenuType = false" @open="chatMenuType=true">
 			<view class="chatMenu flexAB">
@@ -315,6 +342,7 @@
 				view:'',
 				showTip:false,
 				topHeigh:'100rpx',
+				picList:[]
 				 
 			};
 		},
@@ -356,6 +384,7 @@
 			this.chatList = []
 			this.sendReadMsg()
 			this.chatMsgQueryChatMsgHistory()
+			
 		},
 		onUnload(){
 			uni.removeStorageSync('sendText')
@@ -383,6 +412,18 @@
 				}
 				this.api.chatMsgReadMsg(params).then(res=>{
 					// console.log('res',res,params)
+				})
+			},
+			getAllPic(){
+				let params={
+					msgId:this.chatList.length>0?this.chatList[0].id:0,
+				}
+			
+				this.api.getChatAllMsgPic(params).then(res=>{
+					if(res.code == 0&& res.data){
+						this.picList = res.data.reverse()
+					}
+					console.log('res',res)
 				})
 			},
 			closeVoice() { //退出聊天页停止播放语音
@@ -496,8 +537,16 @@
 
 			},
 			watchImg(item){
+				var index = 0
+				for(var i=0; i< this.picList.length;i++){
+					if(item === this.picList[i]){
+						index = i
+					}
+				}
+				console.log('查看当前图片---->',item,index)
 				uni.previewImage({
-					urls:[item]
+					current: index,
+					urls:this.picList
 				})
 			},
 			selctImg(){//打开本地相册
@@ -514,6 +563,7 @@
 						console.log(tempFilePaths[0])
 						/* 上传图片 */
 						const uploadTask = uni.uploadFile({
+							  // url : 'https://api.jhxiao-school.com/file/upload',
 							  url : 'https://pharos3.ewj100.com/file/upload',
 							  filePath: tempFilePaths[0],
 							  fileType: 'image',
@@ -544,13 +594,14 @@
 
 						// return
 						const uploadTask = uni.uploadFile({
+							// url : 'https://api.jhxiao-school.com/file/upload',
 							url : 'https://pharos3.ewj100.com/file/upload',
 							filePath: res.tempFilePath,
 							methods: 'post',
 							name: 'file',
 							success: function (flieRes) {
 								if(flieRes.data){
-									// console.log('上传后的视频地址',JSON.parse(flieRes.data))
+									console.log('上传后的视频地址',JSON.parse(flieRes.data))
 									that.videoMpUrl=JSON.parse(flieRes.data)
 								// that.urlImg = JSON.parse(flieRes.data)
 								that.sendMsg('mp4')
@@ -583,6 +634,12 @@
 					url:'../formInfo/formList?type=checkSend'
 				})
 			},
+			tosendArticle(){
+				uni.navigateTo({
+					url:`/pages/sufferingarticles/sufferingarticles?userChatId=${this.targetUid}&teamChatId=${this.chatUserId}&chatType=${this.chatType}`
+			
+				})
+			},
 			shijianc(time) {
 			  let date = new Date(time)
 			  let Y = date.getFullYear() + '-'
@@ -609,6 +666,12 @@
 							if(this.chatList[i].id==dataMsg.data.id){
 								return
 							}
+						}
+						if(dataMsg.data.msgType=='VIDEO_URL'){
+							// item.url='https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20200317.mp4'
+							let content='<video  style="position: relative;" src='+dataMsg.data.url+'></video>'
+							// console.log('视频富文本',content)
+							dataMsg.data.content=content
 						}
 						dataMsg.data.createTime = this.shijianc(dataMsg.data.createTime)
 						 this.chatList.unshift(dataMsg.data)
@@ -660,13 +723,13 @@
 				// console.log('聊天记录参数',data)
 				this.api.chatMsgQueryChatMsgHistory(data).then(res=>{
 					if(res.code == 0){
-						// console.log('聊天历史记录',res.data.records)
+						console.log('聊天历史记录',res.data.records)
 						let arr  = res.data.records
 						res.data.records.map(item=>{
 							console.log('名字',item.user.nickname)
 							if(item.msgType=='VIDEO_URL'){
 								// item.url='https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20200317.mp4'
-								let content='<video  style="position: relative;" src='+item.url+'></video>'
+								let content='<video  style="max-width:100%;height:auto;display:block;margin:0px auto;" src='+item.url+'></video>'
 								// console.log('视频富文本',content)
 								item.content=content
 							}
@@ -674,6 +737,7 @@
 						let list=type=='refresh'?arr: this.chatList.concat(arr)
 						this.chatList=list
 						if(that.pageNum==1){
+							that.getAllPic()
 							let listLength=that.chatList.length-1
 							that.toView='msg-'+listLength
 						}
@@ -835,6 +899,14 @@
 				// 	url:`../patient/userFormDetail?formId=${item.str1}&userId=${item.user.id}`//表单答案和详情页
 				// })
 			},
+			// 查看文章详情
+			toArticleDetail(item){
+				console.log('去患教文章',item)
+				// uni.navigateTo({
+				// 	url:`/pages/sufferingarticles/articleDetail?userChatId=${this.targetUid}&teamChatId=${this.chatUserId}&chatType=${this.chatType}`
+				// })
+				
+			},
 			// 播放语音
 			voiceActive(url, index, msgId, fromUid) {
 				this.playIndex = index
@@ -986,6 +1058,7 @@
 </style>
 <style lang="less" scoped>
 .chat{
+	-webkit-user-select: text; 
 	.chatMenu{
 		padding: 100rpx 36rpx 84rpx 36rpx;
 		background: #fff;
@@ -1180,19 +1253,23 @@
 			font-weight: bold;
 		}
 		.resourcesList{
-			height: 250rpx;
-			margin-top:30rpx;
+			// height: 250rpx;
+			display: flex;
+			flex-direction: row ;
+			flex-wrap: wrap;
+			margin:30rpx;
 			// background: #fff;
 			font-size: 28rpx;
 			font-family: PingFang SC;
 			font-weight: 400;
 			color: #222222;
 			padding:0 32rpx;
+			justify-content: space-around;
 			text-align: center;
 			.pohoeImg{
-				margin: 0 auto;
-				width: 96rpx;
-				height: 96rpx;
+				// margin: 0 auto;
+				width: 120rpx;
+				height: 120rpx;
 				background: #fff;
 				.pohoeImgs{
 					width: 52rpx;

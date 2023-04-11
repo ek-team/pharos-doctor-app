@@ -2,8 +2,8 @@
     "name" : "法罗适医生",
     "appid" : "__UNI__FBC5308",
     "description" : "",
-    "versionName" : "1.5.3",
-    "versionCode" : 153,
+    "versionName" : "1.5.5",
+    "versionCode" : 155,
     "transformPx" : false,
     /* 5+App特有相关 */
     "app-plus" : {
@@ -56,11 +56,6 @@
                     "NSCameraUsageDescription" : "适用于使用摄像头拍照上传图片以及拍照上传诊断结果"
                 }
             },
-            /* SDK配置 */
-            "sdkConfigs" : {
-                "push" : {},
-                "ad" : {}
-            },
             "icons" : {
                 "android" : {
                     "hdpi" : "E:/wechatP/uni/faluoshi-doc-app/蓝绿色fls/72.png",
@@ -84,6 +79,9 @@
             },
             "splashscreen" : {
                 "useOriginalMsgbox" : true
+            },
+            "sdkConfigs" : {
+                "ad" : {}
             }
         }
     },

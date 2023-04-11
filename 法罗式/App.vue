@@ -178,6 +178,7 @@
 			userInfo:null,//用户信息
 			docInfo:null,//医生信息
 			socketObj:null,
+			// socketUrl:'wss://api.jhxiao-school.com/ws',
 			socketUrl:'wss://pharos3.ewj100.com/ws',
 			// callback:function() {},
 		}

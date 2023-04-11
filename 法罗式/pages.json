@@ -548,6 +548,25 @@
 		// }
 		
        
+        ,{
+            "path" : "pages/sufferingarticles/sufferingarticles",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "患教文章",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/sufferingarticles/articleDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "资讯详情",
+                "enablePullDownRefresh": false,
+				"enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#333333",
