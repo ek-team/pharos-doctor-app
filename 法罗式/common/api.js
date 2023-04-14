@@ -597,6 +597,20 @@ const getArticleDetail = (data) => {//获取患教文章详情
 	  queryString: true
 	})
 }
+const getUserFormFilled = (data) => {//查询某一表单用户填写的数据
+	return service.get({
+	  url: '/form/pageFormUserData',
+	  data,
+	  queryString: true
+	})
+}
+const getUserFormFilledDetail = (data) => {//用户填写的表单详情根据分组id
+	return service.get({
+	  url: '/formUserData/getDataDetailByGroupId',
+	  data,
+	  queryString: true
+	})
+}
 
 export default {
 	login,
@@ -675,5 +689,7 @@ export default {
 	doctorCloseService,
 	getChatAllMsgPic,
 	getArticles,
-	getArticleDetail
+	getArticleDetail,
+	getUserFormFilledDetail,
+	getUserFormFilled
 }

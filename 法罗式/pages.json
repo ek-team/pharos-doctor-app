@@ -491,6 +491,18 @@
 		    
 		},
 		{
+		    "path" : "pages/formInfo/formFillUser",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "已填写用户",
+		        "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#ffffff",
+				"navigationStyle": "custom"
+			
+		    }
+		    
+		},
+		{
 		    "path" : "pages/patient/searchPatient",
 		    "style" :                                                                                    
 		    {

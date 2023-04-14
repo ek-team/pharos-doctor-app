@@ -34,7 +34,7 @@
 			clickInfo(item, index) {
 				console.log("点击了"+ index,item)
 				uni.navigateTo({
-					url:`/pages/news/newsDetail?id=${index}&contentTitle=${item.contentTitle}&content=${item.content}&date=${item.date}&imgPath=${item.imgPath}`
+					url:`/pages/news/newsDetail?id=${index}&contentTitle=${item.contentTitle}&content=${item.content}&date=${item.date}&imgPath=${item.imgPath}&tailText=${item.tailText}`
 				})
 			}
 

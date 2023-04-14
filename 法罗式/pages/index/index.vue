@@ -264,8 +264,7 @@
 			},
 			business() {
 				uni.navigateTo({
-					// url: '/pages/business/business'
-					url: '/pages/sufferingarticles/sufferingarticles'
+					url: '/pages/business/business'
 				})
 			},
 			systemMsg() {

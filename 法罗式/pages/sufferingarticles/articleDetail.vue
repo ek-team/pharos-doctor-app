@@ -6,8 +6,8 @@
 		<!-- <view class="textContent">{{textContent}}</view> -->
 		<u-parse class="textContent" style="background: white;" :content="detail.content" >
 		</u-parse>
-		<view class="bottomView">
-			<u-button class="btnCustomStyle" type="primary" @click='sendMsg' text="发送"></u-button>
+		<view v-if="detailType == 0" class="bottomView">
+			<view class="btnCustomStyle"  @click='sendMsg'>发送</view>
 		</view>
 	</view>
 	
@@ -25,6 +25,7 @@
 				teamChatId:0,
 				userChatId:0,
 				chatType:0,
+				detailType:0
 			}
 		},
 		onLoad(option) {
@@ -33,6 +34,7 @@
 			this.teamChatId = option.teamChatId
 			this.userChatId = option.userChatId
 			this.chatType = option.chatType
+			this.detailType = option.detailType
 			this.upcomingGetById()
 		},
 		methods: {
@@ -49,25 +51,37 @@
 			},
 			sendMsg(){//发送消息
 				console.log('发送消息')
-				let param = {}
-				param.type=1
-				if(this.chatType == 1){//群聊
-					param.chatUserId = this.teamChatId
+				let selfSendData={
+					selfSend:true,
+					type:'article',
+					msg:this.id
 				}
-				if(this.chatType == 0){//单聊
-					param.targetUid = this.userChatId
-				}
-				param.msgType="ARTICLE",
-				param.str=this.id
-				param.msg='文章'
+				uni.setStorageSync('selfSend',selfSendData)
+				uni.navigateBack({
+					delta: 2
+				})
+				// let param = {}
+				// param.type=1
+				// if(this.chatType == 1){//群聊
+				// 	param.chatUserId = this.teamChatId
+				// }
+				// if(this.chatType == 0){//单聊
+				// 	param.targetUid = this.userChatId
+				// }
+				// param.msgType="ARTICLE",
+				// param.str1=this.id
+				// param.msg='文章'
 				
-				if (!getApp().globalData.socketObj.isConnect) {
-				  getApp().globalData.socketObj.initSocket()
-				  console.log('实例未连接,重新连接')
-				  // let oldData=[JSON.stringify(param)]
-				  // uni.setStorageSync('sendData',oldData)
-				}
-				getApp().globalData.socketObj.sendMsg(JSON.stringify(param))
+				// if (!getApp().globalData.socketObj.isConnect) {
+				//   getApp().globalData.socketObj.initSocket()
+				//   console.log('实例未连接,重新连接')
+				//   // let oldData=[JSON.stringify(param)]
+				//   // uni.setStorageSync('sendData',oldData)
+				// }
+				// getApp().globalData.socketObj.sendMsg(JSON.stringify(param))
+				// uni.navigateBack({
+				// 	delta: 2
+				// })
 			}
 		}
 	}
@@ -92,12 +106,17 @@
 		height: 100rpx;
 		position: fixed;
 		bottom: 0;
-		
 		background: white;
 	}
 	.btnCustomStyle{
+		background-color: royalblue;
 		margin-left: 70%;
 		margin-top: 10rpx;
 		width: 20%;
+		padding: 10rpx;
+		border-radius: 10rpx;
+		text-align: center;
+		font-size: 30rpx;
+		color: white;
 	}
 </style>

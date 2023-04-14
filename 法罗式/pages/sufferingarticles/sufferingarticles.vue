@@ -52,7 +52,7 @@
 				clickInfo(item, index) {
 					console.log("点击了"+ index,item)
 					uni.navigateTo({
-						url:`/pages/sufferingarticles/articleDetail?id=${item.id}&userChatId=${this.userChatId}&teamChatId=${this.teamChatId}&chatType=${this.chatType}`
+						url:`/pages/sufferingarticles/articleDetail?id=${item.id}&userChatId=${this.userChatId}&teamChatId=${this.teamChatId}&chatType=${this.chatType}&detailType=0`
 					})
 				},
 				downCallback(){
