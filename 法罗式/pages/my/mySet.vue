@@ -8,6 +8,10 @@
 			修改密码
 			<uni-icons type="right" size="14"></uni-icons>
 		</view>
+		<view class="infoBox" @click="logout">
+			注销用户
+			<uni-icons type="right" size="14"></uni-icons>
+		</view>
 		<!-- #ifdef APP-PLUS -->
 		<!-- <view class="infoBox" >
 			<text>当前版本</text>
@@ -78,6 +82,43 @@
 							})
 						} else if (res.cancel) {
 
+						}
+					}
+				});
+			},
+			logout() {
+				let _this = this
+				
+				uni.showModal({
+					title: '确认注销',
+					content: '注销后将删除你的所有数据',
+					success: function(res) {
+						if (res.confirm) {
+							_this.api.logoutUser().then(res=>{
+								if(res.code==0){
+									uni.showToast({
+										title:'注销成功！',
+										icon:'none'
+									})
+									setTimeout(()=>{
+										uni.clearStorageSync();
+										getApp().globalData.socketObj.sendCloseSocket()
+										getApp().globalData.socketObj.closeSocket()
+										getApp().globalData.socketObj=null
+										uni.redirectTo({
+											url: '../index/login'
+										})
+									},500)
+								}else{
+									uni.showToast({
+										title:'注销失败！'+res.code,
+										icon:'none'
+									})
+								}
+							})
+							
+						} else if (res.cancel) {
+			
 						}
 					}
 				});

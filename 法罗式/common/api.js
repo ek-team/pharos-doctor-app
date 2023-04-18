@@ -563,6 +563,19 @@ const registerUser = (data) => {//注册用户
 	  queryString: true
 	})
 }
+const logoutUser = () => {//注销医生账号
+	return service.get({
+	  url: '/user/cancel',
+	  queryString: true
+	})
+}
+const userReoport = (data) => {//举报内容
+	return service.post({
+	  url: '/reportRecord/save',
+	  data,
+	  queryString: true
+	})
+}
 
 export default {
 	login,
@@ -636,5 +649,7 @@ export default {
 	appVersionUpdate,
 	getWaittingCount,
 	doctorIsLeader,
-	registerUser
+	registerUser,
+	userReoport,
+	logoutUser,
 }

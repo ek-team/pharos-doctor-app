@@ -56,6 +56,7 @@
 													url: urlData.apkUrl,
 													success: (downloadResult) => {
 														 if (downloadResult.statusCode == 200){
+															  uni.hideLoading();
 															 plus.runtime.install(downloadResult.tempFilePath, {force: false},
 																function() {
 																  // uni.showToast({
@@ -71,15 +72,19 @@
 																	 })
 																}
 															)
+														 }else {
+															 console.error(downloadResult)
 														 }
 													}
 												})
 
 											}else if (res.cancel) {
 											   console.log('用户点击了取消')
+											   uni.hideLoading();
 											}
 										},
 										fail(res) {
+										uni.hideLoading();
 										  uni.showToast({
 										   title: '下载失败',
 										   icon: 'none'

@@ -247,8 +247,21 @@
 						结束会话
 					</view>
 				</view>
+				<view class="chatMenus" @click="userReport">
+					<image src="/static/images//icon_car@2x.png" mode="" class="chatMenusImg"></image>
+					<view class="chatMenusText">
+						举报
+					</view>
+				</view>
 			</view>
 		</u-popup>
+		<u-popup :show="userReportShow" mode="center"  @close="userReportShow = false" @open="userReportShow=true">
+			<view class="inputInfos">
+				<view class="">举报内容</view>
+				<textarea type="text" v-model="reportText" placeholder="请输入文本内容" class="inputInfoa"></textarea>
+			</view>
+			<button @click="reportConfirm" style="margin-bottom: 20rpx;">确定</button>
+			</u-popup>
 	</view>
 </template>
 
@@ -280,6 +293,7 @@
 				innerValue:'',
 				inpuInfo:false,
 				chatMenuType:false,
+				userReportShow:false,
 				config:{//自定义头部配置信息
 					title: '张医生的团队',
 					color: '#fff',
@@ -315,6 +329,7 @@
 				view:'',
 				showTip:false,
 				topHeigh:'100rpx',
+				reportText:''
 				 
 			};
 		},
@@ -442,6 +457,34 @@
 					},
 				})
 
+			},
+			userReport(){
+				this.userReportShow = true
+				this.chatMenuType = false
+			},
+			reportConfirm(){
+				if(this.reportText.length<=0){
+					uni.showToast({
+						title:'请输入举报内容',
+						icon:'none'
+					})
+					return
+				}
+				let params={
+					reportDesc:this.reportText,
+				}
+				this.api.userReoport(params).then(res=>{
+					console.log('举报返回----->',res)
+					if(res.code == 0){
+						uni.showToast({
+							title:'提交成功',
+							icon:'none'
+						})
+					}
+					
+				})
+				this.userReportShow = false
+				this.chatMenuType = false
 			},
 			medicalRecord(){
 				this.offSocker()
@@ -985,6 +1028,22 @@
 	}
 </style>
 <style lang="less" scoped>
+.inputInfos{
+		padding:32rpx 22rpx;
+		font-size: 28rpx;
+		font-family: PingFang SC;
+		font-weight: 400;
+		color: #444444;
+		background: #fff;
+		.inputInfoa{
+			width: 650rpx;
+			border: 2rpx solid #ECECEC;
+			opacity: 1;
+			border-radius: 10rpx;
+			padding: 40rpx 28rpx;
+			margin: 28rpx 0;
+		}
+	}	
 .chat{
 	.chatMenu{
 		padding: 100rpx 36rpx 84rpx 36rpx;
