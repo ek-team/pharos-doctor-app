@@ -26,6 +26,7 @@
 			if(!plus.runtime.isAgreePrivacy()){
 			    //弹出自定义隐私政策提示框
 			  }
+			
 		},
 		onShow: function() {
 			// #ifdef APP-PLUS
@@ -135,6 +136,31 @@
 			}
 			
 			// #endif
+			// uni-app客户端获取push客户端标记
+			uni.getPushClientId({
+				success: (res) => {
+					let push_clientid = res.cid
+					this.api.userUpdateById({
+						cid:push_clientid,
+					}).then(res=>{
+						console.log('更新用户信息',res)
+						if(res.code==0){
+							
+						}
+					})
+					console.log('客户端推送标识:',push_clientid)
+				},
+				fail(err) {
+					console.log(err)
+				}
+			}),
+			uni.onPushMessage((res)=>{
+				uni.showToast({
+					title:'收到推送' + res,
+					icon: 'none'
+				})
+				console.log('获取推送的消息',res)
+			}),
 			// return
 			this.api.docInfo().then(res=>{
 				if(res.code == 0){
@@ -164,14 +190,22 @@
 		},
 		onHide: function() {
 			console.log('App Hide')
+			// if (this.globalData.socketObj){
+			// 	this.globalData.socketObj.sendCloseSocket();
+			// 	this.globalData.socketObj.closeSocket()
+			// 	this.globalData.socketObj = null  
+				
+			// 	// console.log('退出')
+			// }
+			
+		},
+		onUnload: function() {
 			if (this.globalData.socketObj){
 				this.globalData.socketObj.sendCloseSocket();
 				this.globalData.socketObj.closeSocket()
 				this.globalData.socketObj = null  
-				
-				// console.log('退出')
+				console.log('退出')
 			}
-			
 		},
 		reciveMsg(res){
 			

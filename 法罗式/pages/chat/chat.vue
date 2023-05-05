@@ -1129,7 +1129,7 @@
 				}
 				if (!getApp().globalData.socketObj.isConnect) {
 					getApp().globalData.socketObj.initSocket()
-					console.log('实例未连接,重新连接')
+					console.log('--实例未连接,重新连接')
 					// let oldData=[JSON.stringify(param)]
 					// uni.setStorageSync('sendData',oldData)
 				}

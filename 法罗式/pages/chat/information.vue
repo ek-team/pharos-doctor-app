@@ -128,7 +128,7 @@
 					id:this.id
 				}
 				this.api.doctorPatientOtherOrderId(data).then(res=>{
-					// console.log('图文咨询详情',res.data)
+					console.log('图文咨询详情',res.data)
 					if(res.code ==0){
 						this.informationDetail  =res.data
 						if(res.data.acceptStatus==0){//待接收

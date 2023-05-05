@@ -23,7 +23,8 @@
         "modules" : {
             "VideoPlayer" : {},
             "Camera" : {},
-            "Record" : {}
+            "Record" : {},
+            "Push" : {}
         },
         /* 应用发布信息 */
         "distribute" : {
@@ -81,7 +82,16 @@
                 "useOriginalMsgbox" : true
             },
             "sdkConfigs" : {
-                "ad" : {}
+                "ad" : {},
+                "push" : {
+                    "unipush" : {
+                        "version" : "2",
+                        "offline" : true,
+                        "hms" : {},
+                        "vivo" : {},
+                        "mi" : {}
+                    }
+                }
             }
         }
     },
@@ -108,7 +118,12 @@
         "enable" : false
     },
     "vueVersion" : "2",
-    "locale" : "auto"
+    "locale" : "auto",
+    "h5" : {
+        "unipush" : {
+            "enable" : true
+        }
+    }
 }
 /* 快应用特有相关 *//* 小程序特有相关 */
 
