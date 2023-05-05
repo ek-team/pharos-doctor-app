@@ -14,7 +14,7 @@
 				</view>
 				<view class="tes6t">
 					<image class="noiceListImg"
-						src="../../static/images/pic_example_5.jpg"
+						:src="item.picture"
 						mode="" style="width:200rpx;height:140rpx;margin-left: 30rpx;"></image>
 				</view>
 			</view>

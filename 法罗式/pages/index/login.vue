@@ -26,6 +26,8 @@
 	</view>
 </template>
 
+
+
 <script>
 	import WebSocketClass from '../../common/webSocket'
 	import Privacy from '@/components/privacy.vue'
@@ -50,7 +52,7 @@
 		methods: {
 			agreePre() {
 				this.isAgree = false
-				this.agreen = false
+				this.agreen = true
 			},
 			register() {
 				console.log('执行了')

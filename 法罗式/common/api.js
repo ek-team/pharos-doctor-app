@@ -611,6 +611,13 @@ const getUserFormFilledDetail = (data) => {//用户填写的表单详情根据�
 	  queryString: true
 	})
 }
+const userReoport = (data) => {//举报内容
+	return service.post({
+	  url: '/reportRecord/save',
+	  data,
+	  queryString: true
+	})
+}
 
 export default {
 	login,
@@ -691,5 +698,6 @@ export default {
 	getArticles,
 	getArticleDetail,
 	getUserFormFilledDetail,
-	getUserFormFilled
+	getUserFormFilled,
+	userReoport,
 }

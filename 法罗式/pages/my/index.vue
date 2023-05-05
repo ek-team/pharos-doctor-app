@@ -64,13 +64,13 @@
 				</view>
 				<image src="/static/images/icon_poi@2x(1).png" mode="" class="menuListIcons"></image>
 			</view> -->
-			<!-- <view class="menuList flexAB" @click="ysxy">
+			<view class="menuList flexAB" @click="ysxy">
 				<view class="flexA">
 					<image src="/static/images/icon_con@2x.png" mode="" class="menuListIcon"></image>
 					隐私政策
 				</view>
 				<image src="/static/images/icon_poi@2x(1).png" mode="" class="menuListIcons"></image>
-			</view> -->
+			</view>
 		</view>
 	</view>
 </template>

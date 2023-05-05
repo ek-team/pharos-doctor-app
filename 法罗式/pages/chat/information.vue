@@ -55,8 +55,8 @@
 
 		<view class="footerContainer" v-if="showOption">
 			<view v-if="(isLeader&&groupType==1)||groupType==0" class="refuseBtn optionText" @click="confirmOption('refuse')">拒绝</view>
-			<view class="refuseBtn confirmBtn">
-				<view class="optionText" @click="confirmOption('recieve')">接收</view>
+			<view class="refuseBtn confirmBtn"@click="confirmOption('recieve')">
+				<view class="optionText" >接收</view>
 				<view >咨询费用：￥{{informationDetail.amount?informationDetail.amount:0}}</view>
 			</view>
 		</view>

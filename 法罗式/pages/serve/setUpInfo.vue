@@ -6,7 +6,7 @@
 			</view>
 		</hx-navbar>
 		<view class="setUpInfos flexAB">
-			<view>关闭{{config.title}}</view>
+			<view>{{config.title}}</view>
 			<u-switch @change="change"  v-model="checked"></u-switch>
 		</view>
 

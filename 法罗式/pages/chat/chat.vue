@@ -47,7 +47,7 @@
 						<!--医生的信息-->
 						<view class="docInfo flex" v-if="item.fromUid == docInfo.id">
 							<view class="docInfos">
-								<view class="name">{{item.user.nickname}}</view>
+								<view class="name">{{item.user.showName?item.user.showName:item.user.nickname}}</view>
 								<!--文字信息-->
 								<view class="content requesContent" v-if="item.msgType=='MESSAGE_TEXT'">
 									<view>{{item.msg}}</view>
@@ -56,13 +56,13 @@
 								<view class="content videoContent formContent" v-if="item.msgType=='FORM'"
 									@click="toFormDetail(item,2)">
 									<image src="/static/images/icon_for@2x.png" mode="" class="formImg"></image>
-									<view class="formTitle">{{item.article? item.article.title:''}}</view>
+									<view class="formTitle">{{item.form? item.form.title:''}}</view>
 								</view>
 								<!--患教文章-->
 								<view class="content videoContent formContent" v-if="item.msgType=='ARTICLE'"
 									@click="toArticleDetail(item)">
 									<image src="/static/images/icon_for@2x.png" mode="" class="formImg"></image>
-									<view class="formTitle">{{item.article? item.article.title:''}}</view>
+									<view class="articleTitle">{{item.article? item.article.title:''}}</view>
 								</view>
 
 								<!-- 语音信息 -->
@@ -110,8 +110,10 @@
 									</view>
 								</view>
 							</view>
-							<image :src="item.user.avatar?item.user.avatar:'/static/images/defaultAvatar.png'" alt=""
+							<image src='/static/images/icon_doctor.png' alt=""
 								class="avatorImg"></image>
+								<!-- <image :src="item.user.avatar?item.user.avatar:'/static/images/icon_doctor.png'" alt=""
+								class="avatorImg"></image> -->
 						</view>
 						<!--患者的信息-->
 						<view class="patientInfo flex" v-if="item.fromUid !== docInfo.id">
@@ -175,6 +177,23 @@
 										查看详情
 									</view>
 								</view>
+								<!-- 随访消息 -->
+								<view class="content requesContent" v-if="item.msgType=='FOLLOW_UP_PLAN'"
+									@click="suifnagplant(item)">
+									<view class="">
+										消息类型:{{item.msg}}
+									</view>
+									<view class="" v-if="item.followUpPlanNotice">
+										提醒:{{item.followUpPlanNotice.followUpPlanContent.notice}}
+									</view>
+									<view class="" v-if="item.followUpPlanNotice">
+										随访阶段:{{item.followUpPlanNotice.push}}/{{item.followUpPlanNotice.totalPush}}
+									</view>
+									<view class="" v-if="item.followUpPlanNotice">
+										查看详情>>
+									</view>
+								</view>
+
 
 							</view>
 
@@ -287,7 +306,20 @@
 						结束会话
 					</view>
 				</view>
+				<view class="chatMenus" @click="userReport">
+					<image src="/static/images//icon_car@2x.png" mode="" class="chatMenusImg"></image>
+					<view class="chatMenusText">
+						举报
+					</view>
+				</view>
 			</view>
+		</u-popup>
+		<u-popup :show="userReportShow" mode="center" @close="userReportShow = false" @open="userReportShow=true">
+			<view class="inputInfos">
+				<view class="">举报内容</view>
+				<textarea type="text" v-model="reportText" placeholder="请输入文本内容" class="inputInfoa"></textarea>
+			</view>
+			<button @click="reportConfirm" style="margin-bottom: 20rpx;">确定</button>
 		</u-popup>
 	</view>
 </template>
@@ -356,7 +388,9 @@
 				view: '',
 				showTip: false,
 				topHeigh: '100rpx',
-				picList: []
+				picList: [],
+				userReportShow: false,
+				reportText:''
 
 			};
 		},
@@ -432,13 +466,16 @@
 				let params = {
 					msgId: this.chatList.length > 0 ? this.chatList[0].id : 0,
 				}
+				if (params.msgId != 0) {
+					this.api.getChatAllMsgPic(params).then(res => {
+						if (res.code == 0 && res.data) {
+							this.picList = res.data.reverse()
+						}
+						console.log('res', res)
+					})
+				}
 
-				this.api.getChatAllMsgPic(params).then(res => {
-					if (res.code == 0 && res.data) {
-						this.picList = res.data.reverse()
-					}
-					console.log('res', res)
-				})
+
 			},
 			closeVoice() { //退出聊天页停止播放语音
 				this.isPlayVoice = false
@@ -464,6 +501,34 @@
 				uni.navigateTo({
 					url: `/pages/case/addCase?id=${this.targetUid}`
 				})
+			},
+			userReport() {
+				this.userReportShow = true
+				this.chatMenuType = false
+			},
+			reportConfirm() {
+				if (this.reportText.length <= 0) {
+					uni.showToast({
+						title: '请输入举报内容',
+						icon: 'none'
+					})
+					return
+				}
+				let params = {
+					reportDesc: this.reportText,
+				}
+				this.api.userReoport(params).then(res => {
+					console.log('举报返回----->', res)
+					if (res.code == 0) {
+						uni.showToast({
+							title: '提交成功',
+							icon: 'none'
+						})
+					}
+
+				})
+				this.userReportShow = false
+				this.chatMenuType = false
 			},
 			// 结束对话
 			endConversation() {
@@ -1000,8 +1065,10 @@
 				this.showImgs = !this.showImgs
 				this.inputText = true
 			},
-			inputSendText() {
-				if (this.innerValue) {
+			inputSendText(e) {
+				// console.log('输入框有值1', e.detail.value)
+				// console.log('输入框有值2', this.innerValue)
+				if (e.detail.value) {
 					// console.log('输入框有值')
 					this.inpuInfo = true
 				} else {
@@ -1080,6 +1147,22 @@
 	}
 </style>
 <style lang="less" scoped>
+	.inputInfos{
+			padding:32rpx 22rpx;
+			font-size: 28rpx;
+			font-family: PingFang SC;
+			font-weight: 400;
+			color: #444444;
+			background: #fff;
+			.inputInfoa{
+				width: 650rpx;
+				border: 2rpx solid #ECECEC;
+				opacity: 1;
+				border-radius: 10rpx;
+				padding: 40rpx 28rpx;
+				margin: 28rpx 0;
+			}
+		}
 	.chat {
 		-webkit-user-select: text;
 
@@ -1345,6 +1428,15 @@
 
 	.formTitle {
 		// margin-right: 180rpx;
+	}
+	.articleTitle {
+		width: 300rpx;
+		font-size: 10pt!important;
+		overflow: hidden !important;
+		text-overflow: ellipsis !important;
+		display: -webkit-box !important;
+		-webkit-line-clamp: 2;//文字上限行
+		-webkit-box-orient: vertical;
 	}
 
 	.requesContent {

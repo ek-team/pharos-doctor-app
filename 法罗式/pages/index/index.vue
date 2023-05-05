@@ -162,8 +162,9 @@
 		},
 		onReachBottom: function() {
 			if (this.totals > this.noiteList.length) {
-				// console.log('到底了',this.totals,this.noiteList.length)
-				// console.log(this.pageNum)
+				console.log('到底了',this.totals,this.noiteList.length)
+				console.log(this.pageNum)
+				this.pageNum = this.totals/this.pageSize
 				this.pageNum++
 				let page = {
 					num: this.pageNum
@@ -199,7 +200,7 @@
 					if (res.code == 0) {
 						getApp().globalData.docInfo = res.data
 						this.docInfos = res.data
-						console.log('获取医生信息' + this.docInfos.nickname)
+						console.log('获取医生信息' , this.docInfos)
 					}
 				})
 			},
@@ -330,10 +331,10 @@
 						this.mescroll.endByPage(curPageLen, totalPage);
 						console.log('执行了 noiteList-->',this.noiteList.length)
 					} else {
-						// if (page.num == 1) {
-						// 	this.noiteList = []
-						// }
-						this.noiteList = []
+						if (page.num == 1) {
+							this.noiteList = []
+						}
+						// this.noiteList = []
 						this.mescroll.endByPage(0, 1);
 						console.log('执行了 noiteList-->',this.noiteList.length)
 						// if (this.noiteList.length == 0) {

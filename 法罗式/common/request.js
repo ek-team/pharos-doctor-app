@@ -1,6 +1,6 @@
 let config = {
-	// url:'https://pharos3.ewj100.com'
-	url:'https://api.jhxiao-school.com'
+	url:'https://pharos3.ewj100.com'
+	// url:'https://api.jhxiao-school.com'
 }
 // https://pharos3.ewj100.com/oauth/token?username=admin&password=pharosbto1&randomStr=55711671529860129&code=&grant_type=password
 let requestStatus = true //防止接口重复 true允许请求，false不允许

@@ -95,6 +95,8 @@
 		padding: 22rpx;
 		color: #888888;
 	}
+	
+	
 	.inputInfos{
 		padding:32rpx 22rpx;
 		font-size: 28rpx;

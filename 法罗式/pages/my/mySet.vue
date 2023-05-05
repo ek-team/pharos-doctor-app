@@ -13,12 +13,12 @@
 			<uni-icons type="right" size="14"></uni-icons>
 		</view>
 		<!-- #ifdef APP-PLUS -->
-		<!-- <view class="infoBox" >
+		<view class="infoBox" >
 			<text>当前版本</text>
 			<view class="">
 				<text>V {{version}}</text>
 			</view>
-		</view> -->
+		</view>
 		<!-- #endif -->
 		<!-- <view class="logout" @click="exit">
 			退出登录
@@ -64,6 +64,7 @@
 				this.docInfo = getApp().globalData.docInfo
 				console.log('医生信息',this.docInfo)
 			}
+			this.version = getApp().globalData.version
 		},
 		methods: {
 			// 退出登录

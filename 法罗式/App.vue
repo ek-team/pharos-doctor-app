@@ -34,6 +34,7 @@
 			if (uni.getSystemInfoSync().platform == 'android') {
 				// 当前平台是安卓时
 				plus.runtime.getProperty(plus.runtime.appid, (widgetInfo) => {
+					this.globalData.version = widgetInfo.version  
 					let data = {
 					  version: widgetInfo.version,
 					  model: "Android"
@@ -94,6 +95,7 @@
 				})
 			} else if (uni.getSystemInfoSync().platform == 'ios') {
 				 plus.runtime.getProperty(plus.runtime.appid, (widgetInfo)=>{
+					 this.globalData.version = widgetInfo.version 
 					let data = {
 					   version: widgetInfo.version,
 					   model: "ios"
@@ -181,6 +183,7 @@
 			// socketUrl:'wss://api.jhxiao-school.com/ws',
 			socketUrl:'wss://pharos3.ewj100.com/ws',
 			// callback:function() {},
+			version:null
 		}
 	}
 </script>
