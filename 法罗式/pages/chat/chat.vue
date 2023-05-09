@@ -748,7 +748,7 @@
 					}
 					if (dataMsg.data.msgType == 'VIDEO_URL') {
 						// item.url='https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20200317.mp4'
-						let content = '<video  style="position: relative;" src=' + dataMsg.data.url + '></video>'
+						let content = '<video  style="max-width:100%;height:auto;display:block;margin:0 auto;" src=' + dataMsg.data.url + '></video>'
 						// console.log('视频富文本',content)
 						dataMsg.data.content = content
 					}
@@ -809,7 +809,7 @@
 							if (item.msgType == 'VIDEO_URL') {
 								// item.url='https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20200317.mp4'
 								let content =
-									'<video  style="max-width:100%;height:auto;display:block;margin:0px auto;" src=' +
+									'<video  style="max-width:100%;height:auto;display:block;margin:0 auto;" src=' +
 									item.url + '></video>'
 								// console.log('视频富文本',content)
 								item.content = content
@@ -1440,7 +1440,7 @@
 	}
 
 	.requesContent {
-		max-width: 500rpx;
+		max-width: 400rpx;
 		box-sizing: border-box;
 	}
 
