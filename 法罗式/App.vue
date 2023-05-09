@@ -164,13 +164,13 @@
 		},
 		onHide: function() {
 			console.log('App Hide')
-			if (this.globalData.socketObj){
-				this.globalData.socketObj.sendCloseSocket();
-				this.globalData.socketObj.closeSocket()
-				this.globalData.socketObj = null  
+			// if (this.globalData.socketObj){
+			// 	this.globalData.socketObj.sendCloseSocket();
+			// 	this.globalData.socketObj.closeSocket()
+			// 	this.globalData.socketObj = null  
 				
-				// console.log('退出')
-			}
+			// 	// console.log('退出')
+			// }
 			
 		},
 		reciveMsg(res){

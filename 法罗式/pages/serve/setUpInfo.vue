@@ -1,7 +1,7 @@
 <template>
 	<view class="setUpInfo">
 		<hx-navbar ref="hxnb" :config="config">
-			<view v-if="!disableInput" class="" slot="right" class="slotRight flexA" @click="sublimt">
+			<view v-if="!disableInput && serviceStatus==0" class="" slot="right" class="slotRight flexA" @click="sublimt">
 				{{!datainfo.doctorUserAction?'添加':'保存'}}
 			</view>
 		</hx-navbar>
@@ -58,6 +58,7 @@
 					count: '',
 					hour: ''
 				},
+				serviceStatus:0,
 				teamList: [],
 				formIndex: -1,
 				datainfo: '', //详情
@@ -95,11 +96,12 @@
 						console.log('关闭结果',res)
 						this.placeholder1 = ''
 						this.placeholder2 = ''
-						this.form.price = ''
-						this.form.count = ''
+						// this.form.price = ''
+						// this.form.count = ''
 					})
 					
 				}else{
+					this.serviceStatus = 0
 					this.placeholder1 ='请输入收费价格',
 					this.placeholder2 = "请输入每日接单数量限制"
 				}
@@ -187,6 +189,11 @@
 							uni.showToast({
 								title: '保存成功！'
 							})
+							setTimeout(function() {
+								uni.navigateBack({
+									delta: 1
+								})
+							}, 1000)
 						}
 					})
 				} else {
@@ -224,6 +231,12 @@
 					if (res.code == 0 && res.data) {
 						this.form = res.data
 						this.disableInput = false
+						this.serviceStatus = res.data.status
+						if(this.serviceStatus == 0){
+							this.checked = true
+						}else{
+							this.checked = false
+						}
 						// this.doctorTeamQueryMyTeam()
 					}else{
 						this.disableInput = true
