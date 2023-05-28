@@ -71,17 +71,19 @@
 			};
 		},
 		onLoad(option) {
+			this.datainfo = JSON.parse(option.item)
+			console.log('获取的参数',this.datainfo)
 			if (option.teamId) { //从团队列表跳过去
 				this.teamId = option.teamId
 				this.config.title = '团队图文咨询'
 				this.getDetail(option.teamId)
 				console.log('从团队跳过来')
-				return
+				// return
+			}else{
+				this.config.title = this.datainfo.category
+				this.doctorUserActionGetServiceDetail()
 			}
-			this.datainfo = JSON.parse(option.item)
-			// console.log('获取的参数',this.datainfo)
-			this.config.title = this.datainfo.category
-			this.doctorUserActionGetServiceDetail()
+			
 
 
 		},
@@ -112,11 +114,24 @@
 					teamId: teamId
 				}).then(res => {
 					this.form = res.data
-					console.log('服务详情',res.data)
+					console.log('团队服务详情',res.data)
 					if (res.data && res.data.id) {
 						this.datainfo = {
 							doctorUserAction: res.data.id
 						}
+						this.form = res.data
+						this.disableInput = false
+						this.serviceStatus = res.data.status
+						console.log('服务状态',this.serviceStatus)
+						if(this.serviceStatus == 0){
+							this.checked = true
+						}else{
+							this.checked = false
+						}
+					}else{
+						this.disableInput = true
+						this.placeholder1 = ''
+						this.placeholder2 = ''
 					}
 					// this.doctorTeamQueryMyTeam()
 				})
@@ -232,6 +247,7 @@
 						this.form = res.data
 						this.disableInput = false
 						this.serviceStatus = res.data.status
+						console.log('服务状态',this.serviceStatus)
 						if(this.serviceStatus == 0){
 							this.checked = true
 						}else{

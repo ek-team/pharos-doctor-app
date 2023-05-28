@@ -31,8 +31,10 @@
 		},
 		onLoad(options) {
 			this.doctorTeamQueryMyTeam()
+			
 			if(options.item){
 				this.serviceInfo=options.item
+				console.log('团队服务参数',this.serviceInfo)
 			}
 		},
 		methods:{
@@ -46,7 +48,7 @@
 			},
 			toEditTeam(item){
 				uni.navigateTo({
-					url:`../serve/setUpInfo?teamId=${item.id}`
+					url:`../serve/setUpInfo?teamId=${item.id}&item=${JSON.stringify(item)}`
 				})
 			}
 		}

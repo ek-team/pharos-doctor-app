@@ -75,8 +75,10 @@
 					success: function(res) {
 						if (res.confirm) {
 							uni.clearStorageSync();
-							getApp().globalData.socketObj.sendCloseSocket()
-							getApp().globalData.socketObj.closeSocket()
+							if(getApp().globalData.socketObj != null){
+								getApp().globalData.socketObj.sendCloseSocket()
+								getApp().globalData.socketObj.closeSocket()
+							}
 							getApp().globalData.socketObj=null
 							uni.redirectTo({
 								url: '../index/login'

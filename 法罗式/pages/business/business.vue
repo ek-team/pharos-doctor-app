@@ -181,6 +181,7 @@
 				let page = {
 					num:1
 				}
+				this.pageNum = 1
 				this.noiteList=[]
 				this.upCallback1(page)
 				// this.mescroll.resetUpScroll();

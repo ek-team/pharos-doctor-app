@@ -1,6 +1,6 @@
 let config = {
-	// url:'https://pharos3.ewj100.com'
-	url:'https://api.jhxiao-school.com'
+	url:'https://pharos3.ewj100.com'
+	// url:'https://api.jhxiao-school.com'
 }
 // https://pharos3.ewj100.com/oauth/token?username=admin&password=pharosbto1&randomStr=55711671529860129&code=&grant_type=password
 let requestStatus = true //防止接口重复 true允许请求，false不允许
@@ -17,7 +17,7 @@ export default {//导出接口对象
   },
   requests(params, type) {
     let url = config.url + params.url
-	let userInfo = uni.getStorageSync('userInfoFLS'),
+	let userInfo = uni.getStorageSync('userInfoFLS'), 
       method = type,
       header = params.header || {},
       data = params.data;

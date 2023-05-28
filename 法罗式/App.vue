@@ -155,11 +155,11 @@
 				}
 			}),
 			uni.onPushMessage((res)=>{
-				uni.showToast({
-					title:'收到推送' + res,
-					icon: 'none'
-				})
-				console.log('获取推送的消息',res)
+				// uni.showToast({
+				// 	title: res,
+				// 	icon: 'none'
+				// })
+				// console.log('获取推送的消息',res)
 			}),
 			// return
 			this.api.docInfo().then(res=>{
@@ -190,13 +190,13 @@
 		},
 		onHide: function() {
 			console.log('App Hide')
-			if (this.globalData.socketObj){
-				this.globalData.socketObj.sendCloseSocket();
-				this.globalData.socketObj.closeSocket()
-				this.globalData.socketObj = null  
+			// if (this.globalData.socketObj){
+			// 	this.globalData.socketObj.sendCloseSocket();
+			// 	this.globalData.socketObj.closeSocket()
+			// 	this.globalData.socketObj = null  
 				
-				// console.log('退出')
-			}
+			// 	// console.log('退出')
+			// }
 		},
 		reciveMsg(res){
 			

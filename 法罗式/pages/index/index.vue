@@ -164,7 +164,7 @@
 			if (this.totals > this.noiteList.length) {
 				console.log('到底了',this.totals,this.noiteList.length)
 				console.log(this.pageNum)
-				this.pageNum = this.totals/this.pageSize
+				// this.pageNum = this.totals/this.pageSize
 				this.pageNum++
 				let page = {
 					num: this.pageNum
@@ -241,7 +241,9 @@
 							})
 						} else {
 							uni.navigateTo({
-								url: `/pages/chat/chat?targetUid=${item.targetUid}&name=${item.nickname}&chatType=0&chatId=${item.chatUserId}&patientOtherOrderId=${res.code==0&&res.data&&res.data.patientOtherOrderStatus==1?res.data.patientOtherOrderNo:null}&serviceEndTime=${res.data.serviceEndTime}`
+								url: `/pages/chat/chat?targetUid=${item.targetUid}&name=${item.nickname}&chatType=0&chatId=${item.chatUserId}
+								&patientOtherOrderId=${res.code==0&&res.data&&res.data.patientOtherOrderStatus==1?res.data.patientOtherOrderNo:null}
+								&serviceEndTime=${res.data.serviceEndTime}&patientId=${item.patientId}`
 							})
 						}
 
@@ -253,7 +255,10 @@
 							})
 						} else {
 							uni.navigateTo({
-								url: `/pages/chat/chat?chatUserId=${item.chatUserId?item.chatUserId:0}&name=${item.nickname}&chatType=1&targetUid=${item.targetUid}&chatId=${item.chatUserId}&patientOtherOrderId=${res.code==0&&res.data&&res.data.patientOtherOrderStatus==1?res.data.patientOtherOrderNo:null}&serviceEndTime=${res.data.serviceEndTime}`
+								url: `/pages/chat/chat?chatUserId=${item.chatUserId?item.chatUserId:0}&name=${item.nickname}
+								&chatType=1&targetUid=${item.targetUid}&chatId=${item.chatUserId}
+								&patientOtherOrderId=${res.code==0&&res.data&&res.data.patientOtherOrderStatus==1?res.data.patientOtherOrderNo:null}
+								&serviceEndTime=${res.data.serviceEndTime}&patientId=${item.patientId}`
 							})
 						}
 
@@ -278,6 +283,7 @@
 				let page = {
 					num: 1
 				}
+				this.pageNum = 1
 				this.noiteList = []
 				this.upCallback(page)
 				// this.mescroll.resetUpScroll();
@@ -668,6 +674,9 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
+		display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+		-webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+		-webkit-line-clamp: 1; /** 显示的行数 **/
 	}
 
 	.timeText {

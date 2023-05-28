@@ -618,6 +618,13 @@ const userReoport = (data) => {//举报内容
 	  queryString: true
 	})
 }
+const getFormDetailByGroupId = (data) => {//查询表单信息
+	return service.get({
+	  url: '/formUserData/getDataDetailByGroupId',
+	  data,
+	  queryString: true
+	})
+}
 
 export default {
 	login,
@@ -700,4 +707,5 @@ export default {
 	getUserFormFilledDetail,
 	getUserFormFilled,
 	userReoport,
+	getFormDetailByGroupId
 }

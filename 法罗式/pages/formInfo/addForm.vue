@@ -2,7 +2,7 @@
 	<view class="addForm">
 		<hx-navbar ref="hxnb" :config="config">
 			<view class="" slot="right" class="slotRight flexA" @click="addForm">
-				{{id==0?'保存':'删除'}}
+				{{id==0||changeFlag?'保存':'删除'}}
 			</view>
 		</hx-navbar>
 		<view class="formBG">
@@ -29,7 +29,7 @@
 					<view class="inputInfos " v-if="item.type==1">
 						<view class="flexAB">
 							{{item.name}}
-							<text v-if="groupId > 0">{{'('+form.formUserDataList[index].answer+')'}}分</text>
+							<text v-if="groupId > 0">{{'('+form.formUserDataList[index].answer+')'}}</text>
 							<text v-else >{{item.placeholder}}</text>
 						</view>
 						<!-- 答案对应的分数 -->
@@ -40,7 +40,7 @@
 								<text v-if="items.score" style="margin-left: 14rpx;">{{'('+items.score+')'}}分</text>
 							</view>
 							<view v-else  class="flexA" style="margin: 28rpx 0;">
-								<text v-if="form.formUserDataList[index].answer" style="margin-left: 14rpx;">{{'('+form.formUserDataList[index].answer+')'}}分</text>
+								<text v-if="form.formUserDataList[index].answer" style="margin-left: 14rpx;">{{'('+form.formUserDataList[index].scope+')'}}分</text>
 							</view>
 						</view>
 					</view>
@@ -108,7 +108,7 @@
 							</view>
 						</view>
 					</view>
-					<view class="editByutton" v-if="selectIndex==index&& id !==0 && groupId==0">
+					<!-- <view class="editByutton" v-if="selectIndex==index&& id !==0 && groupId==0">
 						<view class="flexAC editByuttons" @click="editForm(item,index)">
 							<image src="/static/images/icon_edi@3x.png" mode="" class="editIcon"></image>
 							编辑
@@ -117,7 +117,7 @@
 							<image src="/static/images/icon_canl@3x.png" mode="" class="editIcon"></image>
 							删除
 						</view>
-					</view>
+					</view> -->
 				</view>
 			</view>
 		</view>
@@ -151,6 +151,7 @@
 					],
 				},
 				id: 0,
+				changeFlag:false,
 				groupId: 0
 			};
 		},
@@ -162,6 +163,7 @@
 			if (uni.getStorageSync('addFormData')) {
 				let data = uni.getStorageSync('addFormData')
 				if (data.index != -1) {
+					// this.changeFlag = true
 					that.form.formSettings[data.index] = data.form
 					that.$forceUpdate()
 				} else {
@@ -228,6 +230,7 @@
 						for(var i=0;i<this.form.formUserDataList.length;i++){//多选题 数据转换
 							let optionsList = this.form.formSettings[i]
 							if(optionsList.type == 6){
+								var answerList = this.form.formUserDataList[i].answer
 								for(var j=0;j<optionsList.formOptionsList.length;j++){
 									var item = optionsList.formOptionsList[j]	
 									for(var k=0;k<answerList.length;k++){
@@ -288,7 +291,7 @@
 					return
 				}
 				console.log('提交的表单数据', data)
-				if (this.id == 0) {
+				if (this.id == 0 || this.changeFlag) {
 					this.api.formSave(data).then(res => {
 						console.log(res)
 						if (res.code == 0) {

@@ -89,9 +89,9 @@
 					sex:0,
 					name:'',
 					birthDay:'',
-					
 					Inquiries:[]
 				},
+				patientInfo:null,
 				followUpPlanIds:[],
 				patientType:false,
 				wzdType:false,
@@ -100,7 +100,10 @@
 		onLoad(option) {
 			console.log(option)
 			this.id = option.id
+			
+			this.followUpPlanGetPatientDetail()
 			this.followUpPlanPage()
+			
 		},
 		onShow() {
 			let that = this
@@ -122,6 +125,7 @@
 			jumpPatient(){
 				console.log(this.form)
 				this.patientType =false,
+				console.log(JSON.stringify(this.form))
 				uni.navigateTo({
 					url:`./patientInfo?data=${JSON.stringify(this.form)}`
 				})
@@ -145,6 +149,22 @@
 					console.log(res)
 					if(res.code == 0&&res.data.records.length>0){
 						this.folowList = this.folowList.concat(res.data.records);
+					}
+				})
+			},
+			followUpPlanGetPatientDetail(){
+				let data = {
+					patientId:this.id
+				}
+				this.api.followUpPlanGetPatientDetail(data).then(res=>{
+					console.log(res)
+					if(res.code ==0){
+						this.patientInfo = res.data
+						// this.patientInfo = JSON.parse(option.patientInfo)
+						this.form.name = this.patientInfo.nickname
+						this.form.weight = this.patientInfo.weight
+						this.form.birthDay = this.patientInfo.birthday
+						this.form.sex = this.patientInfo.sexCode
 					}
 				})
 			},

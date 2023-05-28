@@ -21,8 +21,8 @@
 		<!-- 会话结束提醒 -->
 		<view class="tipContent" :style="{'top':topHeigh}" v-if="showTip">
 			<view class="topTipItem">
-				随访开关已关闭，该患者无法主动向你发送消息！
-				<image class="topTipItemIcon" src="/static/images//icon_clear.png" @click="clearTips"></image>
+				咨询已关闭，该患者无法主动向你发送消息！
+				<image class="topTipItemIcon" src="/static/images/icon_clear.png" @click="clearTips"></image>
 			</view>
 		</view>
 		<hx-navbar ref="hxnb" :config="config">
@@ -110,18 +110,17 @@
 									</view>
 								</view>
 							</view>
-							<image src='/static/images/icon_doctor.png' alt=""
-								class="avatorImg"></image>
-								<!-- <image :src="item.user.avatar?item.user.avatar:'/static/images/icon_doctor.png'" alt=""
+							<image src='/static/images/icon_doctor.png' alt="" class="avatorImg"></image>
+							<!-- <image :src="item.user.avatar?item.user.avatar:'/static/images/icon_doctor.png'" alt=""
 								class="avatorImg"></image> -->
 						</view>
 						<!--患者的信息-->
 						<view class="patientInfo flex" v-if="item.fromUid !== docInfo.id">
 							<image class="avatorImg" @click="toPatientDetail(item)"
-								:src="item.user.avatar&&item.user.avatar!='https://thirdwx.qlogo.cn/mmopen/vi_32/POgEwh4mIHO4nibH0KlMECNjjGxQUq24ZEaGT4poC6icRiccVGKSyXwibcPq4BWmiaIGuG1icwxaQX6grC9VemZoJ8rg/132'?item.user.avatar:'/static/images/user_default_icon.png'"
+								:src="item.user&&item.user.avatar&&item.user.avatar!='https://thirdwx.qlogo.cn/mmopen/vi_32/POgEwh4mIHO4nibH0KlMECNjjGxQUq24ZEaGT4poC6icRiccVGKSyXwibcPq4BWmiaIGuG1icwxaQX6grC9VemZoJ8rg/132'?item.user.avatar:'/static/images/user_default_icon.png'"
 								alt=""></image>
 							<view class="patientInfos">
-								<view class="name">{{item.fromUid==targetUid?item.user.patientName:item.user.nickname}}
+								<view v-if="item.user" class="name">{{item.fromUid==targetUid?item.user.patientName:item.user.nickname}}
 								</view>
 								<!--文字信息-->
 								<view class="content requesContent" v-if="item.msgType=='MESSAGE_TEXT'">
@@ -168,7 +167,7 @@
 									<!-- @click.stop="watchImg(item.patientOtherOrder.imageUrlList[0])" -->
 									<image
 										v-if="item.patientOtherOrder.imageUrlList&&item.patientOtherOrder.imageUrlList.length>0"
-										:src="item.patientOtherOrder.imageUrlList[0]" mode="" class="mesImg"></image>
+										:src="item.patientOtherOrder.imageUrlList[0]" mode="" style="max-width: 360rpx;" class="mesImg"></image>
 									<view class="">
 										<!-- <span style="color:#007AFF" v-if="item.str2==0">待接收</span>
 										<span style="color:#8b8b8b" v-if="item.str2==1">已接收</span>
@@ -211,7 +210,7 @@
 					v-if="!inputText"></image>
 				<view v-if="!inputText" class="innerPuters voiceInput" @longpress="startVoice" @touchend="stopVoice">按住
 					说话</view>
-				<textarea v-if="inputText" v-model="innerValue" auto-height="true" @input="inputSendText"
+				<textarea v-if="inputText" v-model="innerValue" auto-height="true" @focus="focusChange" @input="inputSendText"
 					cursor-spacing="30" :show-confirm-bar="false" type="text" placeholder="请输入咨询内容"
 					class="innerPuters" />
 				<!-- :disable-default-padding="true" -->
@@ -390,7 +389,9 @@
 				topHeigh: '100rpx',
 				picList: [],
 				userReportShow: false,
-				reportText:''
+				reportText: '',
+				patientId: null
+
 
 			};
 		},
@@ -403,7 +404,8 @@
 			this.chatId = option.chatId
 			this.targetUid = option.targetUid //患者id
 			this.chatUserId = option.chatUserId //群聊id
-			console.log(this.chatUserId)
+			this.patientId = option.patientId
+			console.log('病人Id-->', this.patientId)
 			this.topHeigh = (uni.getSystemInfoSync().statusBarHeight + 44) * 2 + 'rpx'
 			// this.styleVar['--topHeigh'] = (uni.getSystemInfoSync().statusBarHeight + 44)*2 + 'rpx'
 			// this.docInfo = getApp().globalData.docInfo
@@ -748,11 +750,13 @@
 					}
 					if (dataMsg.data.msgType == 'VIDEO_URL') {
 						// item.url='https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20200317.mp4'
-						let content = '<video  style="max-width:100%;height:auto;display:block;margin:0 auto;" src=' + dataMsg.data.url + '></video>'
+						let content = '<video  style="max-width:100%;max-height: 600rpx;display:block;margin:0 auto;" src=' +
+							dataMsg.data.url + '></video>'
 						// console.log('视频富文本',content)
 						dataMsg.data.content = content
 					}
 					dataMsg.data.createTime = this.shijianc(dataMsg.data.createTime)
+					console.log('转化时间--->',dataMsg.data.createTime,dataMsg.data.createTime)
 					this.chatList.unshift(dataMsg.data)
 
 
@@ -799,6 +803,9 @@
 				if (this.chatType == 1) { //群聊
 					data.chatUserId = this.chatUserId
 				}
+				if (this.patientId && this.patientId != 'undefined') {
+					data.patientId = this.patientId
+				}
 				// console.log('聊天记录参数',data)
 				this.api.chatMsgQueryChatMsgHistory(data).then(res => {
 					if (res.code == 0) {
@@ -809,7 +816,7 @@
 							if (item.msgType == 'VIDEO_URL') {
 								// item.url='https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20200317.mp4'
 								let content =
-									'<video  style="max-width:100%;height:auto;display:block;margin:0 auto;" src=' +
+									'<video  style="max-width:100%;max-height: 600rpx;display:block;margin:0 auto;" src=' +
 									item.url + '></video>'
 								// console.log('视频富文本',content)
 								item.content = content
@@ -966,14 +973,14 @@
 			},
 			// 查看表单详情
 			toFormDetail(item, type) {
-				console.log('去表单页', item.str1)
+				console.log('去表单页', item)
 				if (type == 1) {
 					uni.navigateTo({
-						url: `../patient/userFormDetail?userId=${this.targetUid}&formId=${item.str1}&msgId=${item.str3}&from=chat` //表单详情页
+						url: `../patient/userFormDetail?userId=${this.targetUid}&formId=${item.str1}&msgId=${item.str3}&chatGroupId=${item.str4}&from=chat` //表单详情页
 					})
 				} else {
 					uni.navigateTo({
-						url: `../patient/userFormDetail?userId=${this.targetUid}&formId=${item.str1}&msgId=${item.id}&from=chat` //表单详情页
+						url: `../patient/userFormDetail?userId=${this.targetUid}&formId=${item.str1}&msgId=${item.id}&chatGroupId=${item.str4}&from=chat` //表单详情页
 					})
 				}
 
@@ -1038,6 +1045,9 @@
 				if (this.chatType == 1) { //群聊
 					data.chatUserId = this.chatUserId
 				}
+				if (this.patientId && this.patientId != 'undefined') {
+					data.patientId = this.patientId
+				}
 				this.api.chatMsgQueryChatMsgHistory(data).then(res => {
 					// console.log('聊天记录',res.data)
 					if (res.code == 0) {
@@ -1076,6 +1086,10 @@
 					this.inpuInfo = false
 				}
 			},
+			focusChange(event){
+				this.showImgs = false
+				console.log('焦点--->',event.detail)
+			},
 			sendMsg(type) { //发送消息
 				console.log('发送消息')
 
@@ -1087,6 +1101,9 @@
 				}
 				if (this.chatType == 0) {
 					param.targetUid = this.targetUid
+				}
+				if (this.patientId && this.patientId != 'undefined') {
+					param.patientId = this.patientId
 				}
 				// console.log(param)
 				switch (type) {
@@ -1100,8 +1117,8 @@
 						break;
 					case 'reder':
 						param.msgType = 'REQUEST_READ'
-						param.targetUid = that.targetUid,
-							param.chatUserId = that.chatUserId
+						param.targetUid = that.targetUid
+						param.chatUserId = that.chatUserId
 
 						break;
 					case 'video':
@@ -1147,22 +1164,24 @@
 	}
 </style>
 <style lang="less" scoped>
-	.inputInfos{
-			padding:32rpx 22rpx;
-			font-size: 28rpx;
-			font-family: PingFang SC;
-			font-weight: 400;
-			color: #444444;
-			background: #fff;
-			.inputInfoa{
-				width: 650rpx;
-				border: 2rpx solid #ECECEC;
-				opacity: 1;
-				border-radius: 10rpx;
-				padding: 40rpx 28rpx;
-				margin: 28rpx 0;
-			}
+	.inputInfos {
+		padding: 32rpx 22rpx;
+		font-size: 28rpx;
+		font-family: PingFang SC;
+		font-weight: 400;
+		color: #444444;
+		background: #fff;
+
+		.inputInfoa {
+			width: 650rpx;
+			border: 2rpx solid #ECECEC;
+			opacity: 1;
+			border-radius: 10rpx;
+			padding: 40rpx 28rpx;
+			margin: 28rpx 0;
 		}
+	}
+
 	.chat {
 		-webkit-user-select: text;
 
@@ -1248,7 +1267,7 @@
 
 							// font-size: 20rpx;
 							.mesImg {
-								width: 400rpx;
+								max-width: 400rpx;;
 								height: 400rpx;
 							}
 						}
@@ -1296,7 +1315,7 @@
 						}
 
 						.mesImg {
-							width: 400rpx;
+							max-width: 400rpx;
 							height: 400rpx;
 						}
 
@@ -1429,13 +1448,14 @@
 	.formTitle {
 		// margin-right: 180rpx;
 	}
+
 	.articleTitle {
 		width: 300rpx;
-		font-size: 10pt!important;
+		font-size: 10pt !important;
 		overflow: hidden !important;
 		text-overflow: ellipsis !important;
 		display: -webkit-box !important;
-		-webkit-line-clamp: 2;//文字上限行
+		-webkit-line-clamp: 2; //文字上限行
 		-webkit-box-orient: vertical;
 	}
 
