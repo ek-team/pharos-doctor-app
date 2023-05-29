@@ -71,7 +71,7 @@
 							})
 						}else{
 							uni.navigateTo({
-								url:`/pages/chat/chat?targetUid=${item.userId}&name=${item.user.patientName}&chatType=0&chatId=${item.chatUserId}&patientOtherOrderId=${res.code==0&&res.data&&res.data.patientOtherOrderStatus==1?res.data.patientOtherOrderNo:null}`
+								url:`/pages/chat/chat?targetUid=${item.userId}&name=${item.user.patientName}&chatType=0&chatId=${item.chatUserId}&patientOtherOrderId=${res.code==0&&res.data&&res.data.patientOtherOrderStatus!=0?res.data.patientOtherOrderNo:null}`
 							})
 						}	
 					}else if(item.chatUser&&item.chatUser.groupType == 1){//群聊
@@ -81,7 +81,7 @@
 							})
 						}else{
 							uni.navigateTo({
-								url:`/pages/chat/chat?chatUserId=${item.chatUserId?item.chatUserId:0}&name=${item.user.patientName}&chatType=1&targetUid=${item.userId}&chatId=${item.chatUserId}&patientOtherOrderId=${res.code==0&&res.data&&res.data.patientOtherOrderStatus==1?res.data.patientOtherOrderNo:null}`
+								url:`/pages/chat/chat?chatUserId=${item.chatUserId?item.chatUserId:0}&name=${item.user.patientName}&chatType=1&targetUid=${item.userId}&chatId=${item.chatUserId}&patientOtherOrderId=${res.code==0&&res.data&&res.data.patientOtherOrderStatus!=0?res.data.patientOtherOrderNo:null}`
 							})
 						}
 					}

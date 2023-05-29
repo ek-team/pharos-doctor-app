@@ -144,7 +144,7 @@
 							})
 						} else {
 							uni.navigateTo({
-								url: `/pages/chat/chat?targetUid=${item.targetUid}&name=${item.nickname}&chatType=0&chatId=${item.chatUserId}&patientOtherOrderId=${res.code==0&&res.data&&res.data.patientOtherOrderStatus==1?res.data.patientOtherOrderNo:null}&serviceEndTime=${res.data.serviceEndTime}`
+								url: `/pages/chat/chat?targetUid=${item.targetUid}&name=${item.nickname}&chatType=0&chatId=${item.chatUserId}&patientOtherOrderId=${res.code==0&&res.data&&res.data.patientOtherOrderStatus!=0?res.data.patientOtherOrderNo:null}&serviceEndTime=${res.data.serviceEndTime}`
 							})
 						}
 					
@@ -156,7 +156,7 @@
 							})
 						} else {
 							uni.navigateTo({
-								url: `/pages/chat/chat?chatUserId=${item.chatUserId?item.chatUserId:0}&name=${item.nickname}&chatType=1&targetUid=${item.targetUid}&chatId=${item.chatUserId}&patientOtherOrderId=${res.code==0&&res.data&&res.data.patientOtherOrderStatus==1?res.data.patientOtherOrderNo:null}&serviceEndTime=${res.data.serviceEndTime}`
+								url: `/pages/chat/chat?chatUserId=${item.chatUserId?item.chatUserId:0}&name=${item.nickname}&chatType=1&targetUid=${item.targetUid}&chatId=${item.chatUserId}&patientOtherOrderId=${res.code==0&&res.data&&res.data.patientOtherOrderStatus!=0?res.data.patientOtherOrderNo:null}&serviceEndTime=${res.data.serviceEndTime}`
 							})
 						}
 					

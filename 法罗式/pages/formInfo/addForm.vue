@@ -82,7 +82,15 @@
 							{{item.text}}
 						</view>
 					</view>
-					<view class="inputInfos" v-if="item.type==5">
+					<view class="inputInfos" v-if="item.type==5 && answerImgList.length>0 && !config.rightSlot" @click="viewImg(answerImgList)"> <!-- 5图片 -->
+						<view class="">
+							{{item.name}}
+						</view>
+						<view class="imgContainer" v-for="(items,indexs) in answerImgList">
+							<image class="imgItem" :src="items"></image>
+						</view>
+					</view>
+					<view class="inputInfos" v-else-if="item.type==5">
 						<view class="">
 							{{item.name}}
 						</view>
@@ -152,7 +160,8 @@
 				},
 				id: 0,
 				changeFlag:false,
-				groupId: 0
+				groupId: 0,
+				answerImgList:[]
 			};
 		},
 		watch:{
@@ -242,6 +251,8 @@
 									}
 									
 								}
+							}else if(optionsList.type == 5){//答案是图片
+								this.answerImgList = this.form.formUserDataList[i].answer
 							}
 						
 						}
@@ -252,6 +263,11 @@
 			delForm(index) {
 				this.form.formSettings.splice(index, 1)
 				this.selectIndex = -1
+			},
+			viewImg(list) {
+				uni.previewImage({
+					urls: list
+				})
 			},
 			editForm(item, index) {
 				let urls = ''
@@ -334,6 +350,29 @@
 </script>
 
 <style lang="less" scoped>
+	.imgAnswer {
+		display: flex;
+		flex-direction: row;
+		// justify-content: ;
+		flex-wrap: wrap;
+	}
+	.itemAnswer {
+		padding: 0 20rpx;
+		margin-top: 20rpx;
+	}
+	.imgContainer {
+		width: 25%;
+		margin-bottom: 20rpx;
+		display: flex;
+		justify-content: center;
+		margin-top: 20rpx;
+	
+		.imgItem {
+			width: 150rpx;
+			height: 150rpx;
+			margin-right: 20rpx;
+		}
+	}
 	.addForm {
 		min-height: calc(100vh - 20rpx);
 		background: #f2f2f2;
