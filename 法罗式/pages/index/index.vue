@@ -274,8 +274,11 @@
 				})
 			},
 			systemMsg() {
+				// uni.navigateTo({
+				// 	url: '/pages/systemmsg/systemmsg'
+				// })
 				uni.navigateTo({
-					url: '/pages/systemmsg/systemmsg'
+					url: '/pages/followup/followUpList'
 				})
 			},
 			downCallback() {

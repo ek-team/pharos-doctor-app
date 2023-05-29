@@ -579,6 +579,36 @@
             }
             
         }
+        ,{
+            "path" : "pages/followup/followUpList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "随访计划",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        },
+		{
+		    "path" : "pages/followup/followUpDetail",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "随访计划详情",
+		        "enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+		    }
+		    
+		}
+        ,{
+            "path" : "pages/followup/searchFollowUp",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "搜索随访计划",
+                "enablePullDownRefresh": false,
+            	"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#333333",
