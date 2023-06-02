@@ -1574,8 +1574,6 @@
 		flex-direction: row;
 		width: 100%;
 		z-index: 10;
-		display: flex;
-		flex-direction: row;
 		align-items: center;
 
 		.topItem {

@@ -5,9 +5,12 @@
 				<image src="/static/images/icon_ad@2x.png" mode="" class="addIcon"></image>
 			</view>
 		</hx-navbar>
+		<mescroll-body ref="mescrollRef" @init="mescrollInit" @down="downCallback" @up="upCallback">
 		<view class="searchContainer" @click="toSearch">
-			<image class="searchIcon" src='/static/images/search_icon.png'></image>
-			<input :disabled="true" v-model="searchValue" placeholder="搜索随访名称,手术名称"/>
+			<u-search bgColor="#FFF" :showAction="false" height="35" searchIconSize="35" 
+			:disabled="true" placeholder="搜索随访名称,手术名称" v-model="searchValue"></u-search>
+			<!-- <image class="searchIcon" src='/static/images/search_icon.png'></image>
+			<input :disabled="true" v-model="searchValue" placeholder="搜索随访名称,手术名称"/> -->
 		</view>
 		<u-tabs lineWidth="40" :activeStyle="{
             color: '#303133',
@@ -20,7 +23,7 @@
             transform: 'scale(1)'
         }" itemStyle="padding-left: 15px; padding-right: 15px; height: 45px;" 
 		:list="tabList" :scrollable="false" @click="tabClick"></u-tabs>
-		<mescroll-body ref="mescrollRef" @init="mescrollInit" @down="downCallback" @up="upCallback">
+		
 			<view class="folowList" v-for="(item,index) in folowList" :key="index">
 				<view class="flexAB">
 					<!-- <image src="/static/images/icon_pla@2x1.png" mode="" class="folowListImg"></image> -->
@@ -38,17 +41,15 @@
 					<view class="joinModel" >手术名称：<text>全髋关节置换</text>
 					</view>
 				</view>
-				<view>
-					<view class="createContianer"  @click="detail(item)">
+				<view v-if="pageSource == 0">
+					<view  class="createContianer"  @click="detail(item)">
 						详情
 					</view>
 					<view class="createContianer" @click="toCopyToPerson">
 						复制到个人
 					</view>
 				</view>
-			
 
-				
 				</view>
 			</view>
 		</mescroll-body>
@@ -77,8 +78,13 @@
                 }, {
                     name: '个人',
                    
-                }]
+                }],
+				pageSource:0,
+				
 			};
+		},
+		onLoad(option) {
+			// this.pageSource = option.pageType
 		},
 		onShow() {
 			let page = {
@@ -88,9 +94,10 @@
 			console.log('调用了')
 		},
 		methods:{
-			addFolow(){
+			addFolow(){ 
+				console.log('新增随访计划')
 				uni.navigateTo({
-					url:`./followUpDetail?id=${0}`
+					url:`./editFollowUp`
 				})
 			},
 			detail(item){
@@ -99,13 +106,27 @@
 				})
 			},
 			downCallback(){
+				// let page = {
+				// 	num: 1
+				// }
+				// this.pageNum = 1
+				// this.folowList = []
+				// this.upCallback(page)
+				console.log('下拉刷新')
+				// if(this.mescroll.optUp.use){
+				// 	this.mescroll.resetUpScroll()
+				// }else{
+				// 	setTimeout(()=>{
+				// 		this.mescroll.endSuccess();
+				// 	}, 500)
+				// }
 				this.mescroll.resetUpScroll();
 			},
 			// 去搜索页
 			toSearch(){
-				// uni.navigateTo({
-				// 	url:`./searchFollowUp`
-				// })
+				uni.navigateTo({
+					url:`./searchFollowUp`
+				})
 			},
 			tabClick(e){
 				console.log('tab点击',e)
@@ -216,7 +237,7 @@
 		flex-direction: row;
 		align-items: center;
 		flex: 1;
-		background-color: #fff;
+		
 		border-radius: 40rpx;
 		margin-right: 50rpx;
 		margin-left: 50rpx;
