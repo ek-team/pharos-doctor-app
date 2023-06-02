@@ -34,8 +34,8 @@
 						<view class="infoLists">问诊单 
 							<image src="/static/images/icon@2x1.png" mode="" class="num"></image>
 						</view>
-						<view class="infoLists">检查报告 <text>1</text> </view>
-						<view class="infoLists">关联随访计划 <text>1</text></view>
+						<view class="infoLists">检查报告 <text>{{item.inquiryCount}}</text> </view>
+						<view class="infoLists">关联随访计划 <text>{{item.followUpPlanCount}}</text></view>
 					</view>
 					<view class="infos flexAB">
 						<view class="infosa">{{item.content}}</view>

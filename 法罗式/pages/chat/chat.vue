@@ -1385,7 +1385,7 @@
 
 			.innerPuters {
 				display: flex;
-				flex-direction: row;
+				flex-direction: row; 
 				font-size: 15px;
 				color: #222;
 				background: #fff;
@@ -1393,9 +1393,9 @@
 				// min-height: 44rpx;
 				// max-height: 160rpx;
 				max-height: 300rpx;
-				min-height: 72rpx;
-				line-height: 72rpx;
-				padding: 0 20rpx;
+				min-height: 40rpx;
+				line-height: 40rpx;
+				padding: 20rpx 20rpx;
 				// padding-bottom: 20rpx;
 				overflow-y: scroll;
 

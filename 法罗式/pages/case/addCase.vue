@@ -86,7 +86,7 @@
 					content:'',//详细内容
 					weight:'',
 					height:'',
-					sex:0,
+					sex:-1,
 					name:'',
 					birthDay:'',
 					Inquiries:[]
@@ -124,7 +124,7 @@
 		methods:{
 			jumpPatient(){
 				console.log(this.form)
-				this.patientType =false,
+				// this.patientType =false,
 				console.log(JSON.stringify(this.form))
 				uni.navigateTo({
 					url:`./patientInfo?data=${JSON.stringify(this.form)}`
@@ -165,6 +165,10 @@
 						this.form.weight = this.patientInfo.weight
 						this.form.birthDay = this.patientInfo.birthday
 						this.form.sex = this.patientInfo.sexCode
+						this.form.height = this.patientInfo.height
+						if(this.form.name && this.form.weight&& this.form.birthDay&&this.form.sex>=0 && this.form.height ){
+							this.patientType = true
+						}
 					}
 				})
 			},
@@ -205,13 +209,14 @@
 						icon:'none'
 					})
 					return
-				}else if(this.followUpPlanIds.length == 0){
-					uni.showToast({
-						title:'请选择关联随访计划',
-						icon:'none'
-					})
-					return
 				}
+				// else if(this.followUpPlanIds.length == 0){
+				// 	uni.showToast({
+				// 		title:'请选择关联随访计划',
+				// 		icon:'none'
+				// 	})
+				// 	return
+				// }
 				
 				console.log(data)
 				

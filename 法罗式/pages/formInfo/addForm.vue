@@ -94,12 +94,12 @@
 						<view class="">
 							{{item.name}}
 						</view>
-						<view class="inputInfosList">
+						<!-- <view class="inputInfosList">
 							<view class="imgInfo flexCC">
 								<image src="/static/images/icon_pic@3x1.png" mode="" class="imaIcon"></image>
 								点击上传图片
 							</view>
-						</view>
+						</view> -->
 					</view>
 					<view class="inputInfos" v-if="item.type==6">
 						<view class="">
