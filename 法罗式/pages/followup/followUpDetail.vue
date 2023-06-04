@@ -28,9 +28,17 @@
 					<image src="/static/images/select_right.png" mode="" class="selectFormIcon"></image>
 				</view>
 				<view class="userHeaderView">
-					<view style="margin-left: 22rpx;" v-for="(item,index) in userList">
-						<image src="/static/images/user_default_icon.png" mode="" class="userHeaderIcon"></image>
-						<view>{{item}}</view>
+
+					<view style="margin-left: 22rpx;position: relative;" v-for="(item,index) in userList">
+						<!-- <u-badge :offset="[-20,-20]" :type="type" max="99" style="margin-left: 20rpx;margin-right: 20rpx;" :value="value"></u-badge> -->
+						<!-- <u-badge :offset="[-10,-10]" type="error" count="10"></u-badge> -->
+						<view>
+							<image src="/static/images/user_default_icon.png" mode="" class="userHeaderIcon"></image>
+							<view>{{item}}</view>
+						</view>
+						<view class="angle_mark">
+							<view class="header">新增</view>
+						</view>
 					</view>
 				</view>
 			</view>
@@ -41,7 +49,7 @@
 					</view>
 
 				</view>
-				<view v-for="(item,index) in formList" >
+				<view v-for="(item,index) in formList">
 					<view class="flexAB" @click="lookOverUserForm(item)">
 						<view class="editPullTimeTitle">
 							{{item}}
@@ -104,10 +112,12 @@
 				surgryName: '我是手术名称',
 				userList: ['张喜喜', '刘长长'],
 				formList: ['测试表单1', '测试表单2', '测试表单3'],
-				planClassList: ['测试','dfs'],
+				planClassList: ['测试', 'dfs'],
 				notice: '但是发射点',
-				showPlanUsers:true,
-				showUserForm:true
+				showPlanUsers: true,
+				showUserForm: true,
+				type: "warning",
+				value: '新增'
 			}
 		},
 		methods: {
@@ -124,9 +134,9 @@
 					url: `./followUpUserList`
 				})
 			},
-			lookOverUserForm(item){
+			lookOverUserForm(item) {
 				uni.navigateTo({
-					url:`/pages/formInfo/formFillUser?id=0`
+					url: `/pages/formInfo/formFillUser?id=0`
 				})
 			}
 		}
@@ -150,6 +160,13 @@
 				width: 26rpx;
 				height: 26rpx;
 			}
+		}
+
+		.box {
+			width: 100px;
+			height: 100px;
+			background-color: #909193;
+			border-radius: 15px;
 		}
 
 		.plantPopInfo {
@@ -213,6 +230,28 @@
 			}
 		}
 
+		.angle_mark {
+			position: absolute;
+			top: -10rpx;
+			right: -10rpx;
+			background-color: #ff0000;
+			width: 60rpx;
+			height: 35rpx;
+			align-items: center;
+			transform: rotate(45deg);
+
+			// 角标文字
+			.header {
+				position: absolute;
+				color: #fff;
+				width: 100%;
+				bottom: 0;
+				left: 0;
+				font-size: 16rpx;
+				text-align: center;
+			}
+		}
+
 		.userHeaderView {
 			display: flex;
 			justify-content: left;
@@ -273,8 +312,8 @@
 		}
 
 		.userHeaderIcon {
-			width: 100rpx;
-			height: 100rpx;
+			width: 120rpx;
+			height: 120rpx;
 		}
 
 		.editName {
