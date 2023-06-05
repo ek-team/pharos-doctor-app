@@ -1,7 +1,7 @@
 <template>
 	<view class="pageStyle">
 		<hx-navbar ref="hxnb" :config="config">
-			<view class="" slot="right" class="slotRight flexA" @click="addPatient">
+			<view class="" slot="right" class="slotRight flexA">
 				<image src="/static/images/icon_add@3x.png" mode="" class="slotRighticon"></image>
 			</view>
 		</hx-navbar>

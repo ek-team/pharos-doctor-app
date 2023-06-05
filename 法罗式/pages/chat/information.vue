@@ -6,6 +6,15 @@
 		<view class="informations">
 			订单金额： <text>{{informationDetail.amount}}</text>
 		</view> -->
+		<view v-if="orderStatus == 0" class="informations">
+			订单状态： <text>待接受</text>
+		</view>
+		<view v-else-if="orderStatus == 1" class="informations">
+			订单状态： <text>已接受</text>
+		</view>
+		<view v-else class="informations">
+			订单状态： <text>已拒绝</text>
+		</view>
 		<view class="informations">
 			有效时长： <text>{{informationDetail.efficientHour}}</text>
 		</view>
@@ -86,7 +95,8 @@
 				isLeader:false,
 				groupType:0,
 				teamId:null,
-				docInfo:null
+				docInfo:null,
+				orderStatus:0
 			};
 		},
 		onLoad(option) {
@@ -131,6 +141,7 @@
 					console.log('图文咨询详情',res.data)
 					if(res.code ==0){
 						this.informationDetail =res.data
+						this.orderStatus = res.data.acceptStatus
 						if(res.data.acceptStatus==0){//待接收
 							this.showOption=true
 						}else{

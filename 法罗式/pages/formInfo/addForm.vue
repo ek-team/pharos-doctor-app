@@ -39,8 +39,9 @@
 								{{items.text}}
 								<text v-if="items.score" style="margin-left: 14rpx;">{{'('+items.score+')'}}分</text>
 							</view>
-							<view v-else  class="flexA" style="margin: 28rpx 0;">
+							<view v-if="groupId>0" class="flexA" style="margin: 28rpx 0;">
 								<text v-if="form.formUserDataList[index].answer" style="margin-left: 14rpx;">{{'('+form.formUserDataList[index].scope+')'}}分</text>
+								<!-- <text  style="margin-left: 14rpx;">10分</text> -->
 							</view>
 						</view>
 					</view>

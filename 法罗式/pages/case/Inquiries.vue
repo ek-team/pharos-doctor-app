@@ -170,7 +170,8 @@
 						console.log(tempFilePaths[0])
 						/* 上传图片 */
 						const uploadTask = uni.uploadFile({
-							  url : 'https://pharos3.ewj100.com/file/upload',
+							  // url : 'https://pharos3.ewj100.com/file/upload',
+							  url : 'https://api.jhxiao-school.com/upload',
 							  filePath: tempFilePaths[0],
 							  fileType: 'image',
 							  methods: 'post',
