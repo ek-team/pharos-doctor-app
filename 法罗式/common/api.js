@@ -625,6 +625,13 @@ const getFormDetailByGroupId = (data) => {//查询表单信息
 	  queryString: true
 	})
 }
+const copyFollowUpPlan = (data) => {//复制随访计划到个人
+	return service.get({
+	  url: '/followUpPlan/copyFollowUpPlan',
+	  data,
+	  queryString: true
+	})
+}
 
 export default {
 	login,
@@ -707,5 +714,6 @@ export default {
 	getUserFormFilledDetail,
 	getUserFormFilled,
 	userReoport,
-	getFormDetailByGroupId
+	getFormDetailByGroupId,
+	copyFollowUpPlan
 }

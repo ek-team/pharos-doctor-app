@@ -81,7 +81,7 @@
 			},
 			watchForm(item){
 				uni.navigateTo({
-					url:`./formFillUser?id=${item.id}`
+					url:`./formFillUser?id=${item.id}&operationaType=0`
 				})
 			},
 			downCallback(){

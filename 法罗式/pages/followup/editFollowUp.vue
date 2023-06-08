@@ -2,7 +2,7 @@
 	<view class="editFollowUpContent">
 		<hx-navbar ref="hxnb" :config="config">
 			<view class="" slot="right" class="slotRight flexA" @click="sublimt">
-				保存
+				{{rightText}}
 			</view>
 		</hx-navbar>
 		<view class="editName">
@@ -10,7 +10,7 @@
 				<view class="editPullTimeTitle">
 					随访名称：
 				</view>
-				<input type="text" class="editInput" placeholder="请输入随访名称" v-model="followUpName">
+				<input type="text" class="editInput" placeholder="请输入随访名称" v-model="followUp.name">
 
 			</view>
 			<view class="flexAB">
@@ -18,8 +18,8 @@
 					手术名称：
 				</view>
 				<view class="flexA editInput">
-					<input type="text" placeholder="请输入手术名称" v-model="surgryName">
-					<image src="/static/images/icon_cho@2x2.png" mode="" class="selectFormIcon"></image>
+					<input type="text" placeholder="请输入手术名称" v-model="followUp.optionName">
+					<!-- <image src="/static/images/icon_cho@2x2.png" mode="" class="selectFormIcon"></image> -->
 				</view>
 			</view>
 		</view>
@@ -40,7 +40,7 @@
 							节点日期
 							<view class="flexA plantPopInfoDay" @click="item.showDateSelect = !item.showDateSelect">
 								<view class="plantPopInfoDayText">
-									{{item.selectNoticeDate == ''?'请选择时间':'术后'+item.selectNoticeDate}}
+									{{item.dayStr == ''?'请选择时间':'术后'+item.dayStr}}
 									<!-- {{jhjd.day==''?'请选择时间':jhjd.day}} -->
 								</view>
 								<image src="/static/images/icon_cho@2x2.png" mode="" class="selectFormIcon"></image>
@@ -69,7 +69,7 @@
 								:range="formList">
 								<view class="uni-input flexA">
 									<view class="" style="width:480rpx;">
-										{{formList[item.formIndex].title}}
+										{{formList.length>0?formList[item.formIndex].title:''}}
 									</view>
 									<image src="/static/images/icon_cho@2x2.png" mode="" class="selectFormIcon"></image>
 								</view>
@@ -87,7 +87,7 @@
 								:value="item.articleIndex" :range="articleList">
 								<view class="uni-input flexA">
 									<view class="" style="width:480rpx;">
-										{{articleList[item.articleIndex].title}}
+										{{articleList.length>0?articleList[item.articleIndex].title:''}}
 									</view>
 									<image src="/static/images/icon_cho@2x2.png" mode="" class="selectFormIcon"></image>
 								</view>
@@ -110,15 +110,20 @@
 
 <script>
 	var inputObj = {
+		formId: 0,
+		formTitle: '',
+		articleId: 0,
+		articleTitle: '',
 		formIndex: 0,
 		articleIndex: 0,
 		formState: 0,
 		articleState: 0,
 		showDateSelect: false,
 		notice: '',
-		selectNoticeDate: '',
+		dayStr: '',
+		day: '',
 		number: 1,
-		numberType: 1,
+		numberType: 2,
 		hour: 1,
 	}
 	export default {
@@ -131,30 +136,72 @@
 					backgroundColor: [1, ['#5AA1FF', '#5AA1FF']],
 					rightSlot: true,
 				},
-				followUpName: '',
-				notice: '',
-				formState: 0,
-				articleState: 0,
-				showDateSelect: false,
+				rightText:'保存',
 				dateList: [
 					[],
 					[],
 					[]
 				],
+				followUp: {
+					id:0,
+					name: '',
+					optionName: '',
+					createType: 0,
+					joinType: 1, //1自动加入2手动管理
+					pushType: 1, //推送时间1首次加入推送，2固定时间推送
+					time: '',
+					pushHour: '',
+					pushMinute: '',
+					patientUserCount: 0, //患者数量
+					followUpPlanPatientUsers: [], //随访患者的id
+					followUpPlanContentList: [], //随访患者的计划
+				},
 				formList: [],
-				formIndex: 0,
 				articleList: [],
-				articleIndex: 0,
-				selectNoticeDate: '',
 				planClassList: [],
 				goIndexView: '',
 				currentViewId: 0,
 				picker: null,
-				surgryName:''
-				
+				operationType: 0 ,//0新建，1编辑
+				followUpId:0
+
 			}
 		},
-		onLoad() {
+		onLoad(option) {
+			this.operationType = option.operationaType
+			if (this.operationType == 0) {
+				this.config.title = '新建随访计划'
+				this.planClassList.push(JSON.parse(JSON.stringify(inputObj)))
+			} else {
+				this.config.title = '编辑随访计划'
+				this.followUp.name = option.name
+				this.followUp.optionName = option.optionName
+				this.followUpId = option.id
+				let list = JSON.parse(option.planClassList) 
+				console.log('传递的节点', list)
+				list.map(item=>{
+					var itemObj = JSON.parse(JSON.stringify(inputObj))
+					itemObj.formId = item.formId
+					if(item.formId>0){
+						itemObj.formTitle = item.form.title
+					}
+					if(item.articleId>0){
+						itemObj.articleTitle = item.article.title
+					}
+					itemObj.articleId = item.articleId
+					itemObj.formState = item.formId>0?1:0
+					itemObj.articleState = item.articleId>0?1:0
+					itemObj.notice = item.notice
+					itemObj.number = item.number
+					itemObj.numberType = item.numberType
+					itemObj.hour = item.hour
+					itemObj.day = item.day
+					itemObj.dayStr = item.dayStr	
+					this.planClassList.push(itemObj)
+					console.log('转换后的数据-->',this.planClassList)
+				})
+			}
+
 			this.dateList[1][0] = '天后'
 			this.dateList[1][1] = '周后'
 			this.dateList[1][2] = '月后'
@@ -165,20 +212,90 @@
 			for (var i = 0; i < 24; i++) {
 				this.dateList[2][i] = (i + 1) + ':00'
 			}
-			this.planClassList.push(JSON.parse(JSON.stringify(inputObj)))
 			this.formPageScoped()
 			this.getArticles()
 		},
 		methods: {
 			sublimt: function() {
-
+				if (this.followUp.name == '') {
+					uni.showToast({
+						title: '请输入随访名称',
+						icon: "none"
+					})
+					return
+				}
+				if (this.followUp.optionName == '') {
+					uni.showToast({
+						title: '请输入手术名称',
+						icon: "none"
+					})
+					return
+				}
+				for (var i = 0; i < this.planClassList.length; i++) {
+					let obj = this.planClassList[i]
+					if (obj.dayStr == '' || obj.notice == '') {
+						uni.showToast({
+							title: '请填写节点信息',
+							icon: "none"
+						})
+						return
+					}
+				}
+				this.followUp.followUpPlanContentList = this.planClassList
+				console.log('随访计划参数--->', this.followUp)
+				if(this.operationType == 0){
+					this.api.followUpPlanSave(this.followUp).then(res => {
+						console.log('新建随访计划返回--->', res.data)
+						if (res.code == 0) {
+							uni.navigateBack({
+								delta: 1
+							})
+						} else {
+							uni.showToast({
+								title: '保存失败' + res.code,
+								icon: "none"
+							})
+						}
+					
+					})
+				}else{
+					this.followUp.followUpPlanContentList = this.planClassList
+					this.followUp.id = this.followUpId
+					this.api.followUpPlanUpdateById(this.followUp).then(res=>{
+						if (res.code == 0) {
+							uni.navigateBack({
+								delta: 1
+							})
+						} else {
+							uni.showToast({
+								title: '保存失败' + res.code,
+								icon: "none"
+							})
+						}
+					})
+				}
+				
 			},
 			addFrom(index) {
 				this.planClassList[index].formState = this.planClassList[index].formState == 0 ? 1 : 0
+				if (this.planClassList[index].formState == 0) {
+					this.planClassList[index].formId = 0
+					this.planClassList[index].formTitle = ''
+				} else if (this.planClassList[index].formIndex == 0) { //默认选中第一项 给数据赋值
+					this.planClassList[index].formId = this.formList[0].id
+					this.planClassList[index].formTitle = this.formList[0].title
+				}
 			},
 			addArticle(index) {
 				this.planClassList[index].articleState = this.planClassList[index].articleState == 0 ? 1 : 0
 				// this.articleState = this.articleState == 0 ? 1 : 0
+				if (this.planClassList[index].articleState == 0) {
+					this.planClassList[index].articleId = 0
+					this.planClassList[index].articleTitle = ''
+				} else if (this.planClassList[index].articleIndex == 0) { //默认选中第一项 给数据赋值
+					this.planClassList[index].articleId = this.articleList[0].id
+					this.planClassList[index].articleTitle = this.articleList[0].title
+				}
 			},
 			formPageScoped() {
 				let data = {
@@ -189,6 +306,16 @@
 					console.log(res.data)
 					if (res.code == 0) {
 						this.formList = res.data.records
+						// var tempId = 0
+						this.planClassList.map((outItem,outIndex)=>{
+							this.formList.map((item,index)=>{
+								if(outItem.formId == item.id){
+									this.planClassList[outIndex].formIndex = index
+								}
+							})
+						})
+						
+						
 					}
 				})
 			},
@@ -201,6 +328,13 @@
 					console.log(res)
 					if (res.code == 0 && res.data.records.length > 0) {
 						this.articleList = res.data.records
+						this.planClassList.map((outItem,outIndex)=>{
+							this.articleList.map((item,index)=>{
+								if(outItem.articleId == item.id){
+									this.planClassList[outIndex].articleIndex = index
+								}
+							})
+						})
 					} else {
 						this.articleList = []
 					}
@@ -212,29 +346,37 @@
 			},
 			bindPickerChange(e, index) { //表单选择
 				console.log(e.detail.value)
+				let position = e.detail.value
 				this.planClassList[index].formIndex = e.detail.value
+				this.planClassList[index].formId = this.formList[position].id
+				this.planClassList[index].formTitle = this.formList[position].title
 			},
 			articleBindPickerChange(e, index) { //科教文章
+				let position = e.detail.value
 				this.planClassList[index].articleIndex = e.detail.value
+				this.planClassList[index].articleId = this.articleList[position].id
+				this.planClassList[index].articleTitle = this.articleList[position].title
+				console.log('文章选择', e.detail.value,this.articleList[position].title);
 			},
 			bindSelectDateChange(e, index) { //节点日期
+				console.log('确认了', e);
 				var dataList = e.value
-				this.planClassList[index].selectNoticeDate = dataList[0] + dataList[1] + dataList[2]
+				this.planClassList[index].dayStr = dataList[0] + dataList[1] + dataList[2]
 				this.planClassList[index].showDateSelect = false
 			},
 			bindDatePickerChange(e, index) {
 				// if (e.columnIndex == 1 && e.index != 0 && this.dateList[0].length <= 0) {
 				// 	this.picker = this.$refs.uPicker
-					
+
 				// 	this.picker.setColumnValues(0, this.dateList[0])
 				// 	this.picker.setColumnValues(2, this.dateList[2])
 				// }
-				console.log('执行了' + this.dateList[0].length);
+				console.log('执行了', e);
 				if (e.columnIndex == 0) {
 					this.planClassList[index].number = e.index + 1
 				}
 				if (e.columnIndex == 1) {
-					this.planClassList[index].numberType = e.index + 1
+					this.planClassList[index].numberType = e.index + 2
 				}
 				if (e.columnIndex == 2) {
 					this.planClassList[index].hour = e.index + 1

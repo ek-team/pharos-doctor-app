@@ -24,11 +24,11 @@
         }" itemStyle="padding-left: 15px; padding-right: 15px; height: 45px;" 
 		:list="tabList" :scrollable="false" @click="tabClick"></u-tabs>
 		
-			<view class="folowList" v-for="(item,index) in folowList" :key="index">
+			<view class="folowList" v-for="(item,index) in folowList" :key="index"  @click="itemDetail(item)">
 				<view class="flexAB">
 					<!-- <image src="/static/images/icon_pla@2x1.png" mode="" class="folowListImg"></image> -->
 					<view class="flexAB" style="width:100%;">
-						<text class="name">全髋关节置换--随访计划</text>
+						<text class="name">{{item.name}}--随访计划</text>
 						<view class="num">
 							{{item.patientUserCount}}人
 						</view>
@@ -36,16 +36,16 @@
 				</view>
 				<view class="flexAB">
 				<view >
-					<view class="joinModel" >计划周期：<text>60天</text>
+					<view class="joinModel" >计划周期：<text>{{item.serviceDay}}</text>
 					</view>
-					<view class="joinModel" >手术名称：<text>全髋关节置换</text>
+					<view class="joinModel" >手术名称：<text>{{item.optionName}}</text>
 					</view>
 				</view>
 				<view v-if="pageSource == 0">
 					<view  class="createContianer"  @click="detail(item)">
 						详情
 					</view>
-					<view class="createContianer" @click="toCopyToPerson">
+					<view class="createContianer" @click="toCopyToPerson(item)">
 						复制到个人
 					</view>
 				</view>
@@ -70,8 +70,10 @@
 					rightSlot:true,
 				},
 				folowList:[],
-				pageSize:10,
+				totals:0,
+				pageSize:4,
 				totalPage:0,
+				pageNum:1,
 				searchValue:'',
 				tabList:[{
                     name: '公用',
@@ -79,17 +81,20 @@
                     name: '个人',
                    
                 }],
+				tabIndex:0,
 				pageSource:0,
+				
 				
 			};
 		},
 		onLoad(option) {
-			// this.pageSource = option.pageType
+			this.pageSource = option.pageType
 		},
 		onShow() {
 			let page = {
 				num:1
 			}
+			this.pageNum = 1
 			this.upCallback(page)
 			console.log('调用了')
 		},
@@ -97,13 +102,21 @@
 			addFolow(){ 
 				console.log('新增随访计划')
 				uni.navigateTo({
-					url:`./editFollowUp`
+					url:`./editFollowUp?operationaType=0`
 				})
 			},
 			detail(item){
 				uni.navigateTo({
 					url:`./followUpDetail?id=${item.id}`
 				})
+			},
+			itemDetail(item){
+				if(this.pageSource == 1){
+					uni.navigateTo({
+						url:`./followUpDetail?id=${item.id}`
+					})
+				}
+				
 			},
 			downCallback(){
 				// let page = {
@@ -120,6 +133,7 @@
 				// 		this.mescroll.endSuccess();
 				// 	}, 500)
 				// }
+				this.pageNum = 1
 				this.mescroll.resetUpScroll();
 			},
 			// 去搜索页
@@ -130,14 +144,62 @@
 			},
 			tabClick(e){
 				console.log('tab点击',e)
-			},
-			toCopyToPerson(){
+				if(this.tabIndex != e.index){
+					this.tabIndex = e.index
+					let page = {
+						num: 1
+					}
+					this.pageNum = 1
+					this.upCallback(page)
+				}
+				
 				
 			},
+			toCopyToPerson(item){
+				let that = this
+				uni.showModal({
+					title: '操作提示',
+					content: '确认复制随访计划',
+					success: function(res) {
+						if (res.confirm) {
+							let data ={
+								followUpPlanId:item.id
+							}
+						that.api.copyFollowUpPlan(data).then(res=>{
+							console.log('复制结果',res.data)
+							if(res.code == 0){
+								uni.showToast({
+									title:'复制完成',
+									icon:'none'
+								})
+							}
+						})
+						} else if (res.cancel) {
+				
+						}
+					}
+				});
+				
+					
+			},
+			onReachBottom: function() {
+				if (this.totals > this.folowList.length) {
+					console.log('到底了',this.totals,this.folowList.length)
+					console.log(this.pageNum)
+					// this.pageNum = this.totals/this.pageSize
+					this.pageNum++
+					let page = {
+						num: this.pageNum
+					}
+					this.upCallback(page)
+				}
+			},
 			upCallback(page) {//加载
+			
 				let data = {
 					pageSize:this.pageSize,
 					pageNum:page.num,
+					createType:this.tabIndex == 0?1:null
 				}
 				// console.log('pageNum'+page.num)
 				// console.log('totalPage'+this.totalPage)
@@ -151,6 +213,7 @@
 						let curPageLen = res.data.records.length;
 						let totalPage = parseInt(res.data.total/this.pageSize)+1;
 						this.totalPage = totalPage
+						this.totals = res.data.total
 						if (page.num == 1) this.folowList = [];
 						this.folowList = this.folowList.concat(curPageData);
 						this.mescroll.endByPage(curPageLen, totalPage);

@@ -706,7 +706,8 @@
 			// 随访计划
 			toFollowUp() {
 				uni.navigateTo({
-					url: '../patient/followUp'
+					// url: '../patient/followUp'
+					url: '/pages/followup/followUpList?pageType=1'
 				})
 			},
 			// 表单推送

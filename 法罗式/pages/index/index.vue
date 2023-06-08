@@ -274,12 +274,12 @@
 				})
 			},
 			systemMsg() {
-				// uni.navigateTo({
-				// 	url: '/pages/systemmsg/systemmsg'
-				// })
 				uni.navigateTo({
-					url: '/pages/followup/followUpList'
+					url: '/pages/systemmsg/systemmsg'
 				})
+				// uni.navigateTo({
+				// 	url: '/pages/followup/followUpList'
+				// })
 			},
 			downCallback() {
 				console.log('下拉刷新')

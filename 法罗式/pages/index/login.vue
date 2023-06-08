@@ -155,7 +155,7 @@
 			background: rgba(55, 142, 255, 1);
 			margin: 40rpx auto;
 			border-radius: 20rpx;
-			font-size: 28rpx;
+			font-size: 40rpx;
 			font-family: PingFang SC;
 			font-weight: 400;
 			line-height: 88rpx;

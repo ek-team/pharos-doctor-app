@@ -17,7 +17,7 @@
 				<view class="fromName">
 					{{'('+item.scope+')'}}
 				</view>
-				<image src="/static/images/icon_poi@2x(1).png" mode="" class="fromglListImgs"></image>
+				<image v-if="operationaType == 0" src="/static/images/icon_poi@2x(1).png" mode="" class="fromglListImgs"></image>
 			</view>
 		</view>
 
@@ -36,20 +36,25 @@
 					rightSlot:false,
 				},
 				formId: 0,
-				fromglList:[]
+				fromglList:[],
+				operationaType:0
 
 			};
 		},
 		onLoad(options) {
 			this.formId = options.id
+			this.operationaType = options.operationaType
 			this.getFormFillUser()
 
 		},
 		methods: {
 			watchUserForm(item) {
-				uni.navigateTo({
-					url: `./addForm?groupId=${item.groupId}`
-				})
+				if(this.operationaType == 0){
+					uni.navigateTo({
+						url: `./addForm?groupId=${item.groupId}`
+					})
+				}
+				
 			},
 			getFormFillUser(){
 				let data = {

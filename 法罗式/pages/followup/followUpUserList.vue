@@ -16,11 +16,10 @@
 			<checkbox-group @change="checkboxChange">
 				<label class="list-cell flexABW" v-for="(cell, index) in filterUserList">
 					<view class="flexAB">
-						<view class="checkboxButtom" v-if="showConfirm">
+						<view class="checkboxButtom" v-if="!cell.alreadySelected">
 							<!-- <checkbox :value="cell" :checked="cell.checked" /> -->
 							<checkbox :value="JSON.stringify(cell)" :checked="cell.checked" />
 						</view>
-
 						<image :src="cell.avatar == ''? '/static/images/user_default_icon.png':cell.avatar" mode=""
 							class="userImg" @click="jumpDetail(cell)"></image>
 						<view class="flexA infoContainer" style="" @click="jumpDetail(cell)">
@@ -29,11 +28,14 @@
 							</view>
 						</view>
 					</view>
-					<view>全髋关节置换</view>
-					<image v-if="showDelete" src="/static/images/icon_del@2x.png" mode="" class="patientListImgs"
-						@click="delPathen(index)"></image>
+					<view class="operationName">{{cell.diagnosis}}</view>
+					<image v-if="cell.alreadySelected" src="/static/images/icon_del@2x.png" mode=""
+						class="patientListImgs" @click="delPathen(index)"></image>
 				</label>
 			</checkbox-group>
+		</view>
+		<view class="sublimt" @click="btnOperation">
+			{{bottomText}}
 		</view>
 	</view>
 </template>
@@ -59,12 +61,17 @@
 				inputName: '',
 				showDelete: true,
 				filterUserList: [],
-				
+				alreadySelectedUsers: [],
+				bottomText:'新增患者'
+
+
 
 			}
 		},
 		onLoad(option) {
-			
+			this.alreadySelectedUsers = JSON.parse(option.userList)
+			this.filterUserList = this.alreadySelectedUsers
+			console.log('接收数据',this.filterUserList)
 		},
 		onShow() {
 			this.followUpPlanGetPatientUserByDoctor()
@@ -72,8 +79,16 @@
 		methods: {
 			// 选择随访用户
 			checkboxChange(e) {
-				console.log('test--->', e)
-				this.checkUserList = e.detail.value
+				this.checkUserList = []
+				// console.log('test--->', eval("("+e.detail.value+")"))
+				e.detail.value.map(item=>{
+					console.log('项目--->',JSON.parse(item).id)
+					var itemJson = JSON.parse(item)
+					itemJson.alreadySelected = true
+					console.log('项目--->',itemJson.alreadySelected)
+					this.checkUserList.push(itemJson)
+				})
+				// console.log('test--->', this.checkUserList)
 			},
 			searchConfirm: function(value) {
 				console.log('输入框内容' + value)
@@ -89,24 +104,66 @@
 				console.log('清除输入框内容' + value)
 				this.filterUserList = this.docPatirntList
 			},
-			inputChange:function(input){
+			inputChange: function(input) {
 				this.searchUser(input)
 				console.log('实时输入框内容' + input)
 			},
 			delPathen(index) {
+				console.log('删除位置-->',index)
+				// this.filterUserList.splice(index,1)
+				this.alreadySelectedUsers.splice(index,1)
 
 			},
-			searchUser(value){
-				this.filterUserList = this.docPatirntList.filter((item) => {
-					//函数本身返回布尔值，只有当返回值为true时，当前项存入新数组。
-					return item.patientName.match(value) != null
-				})
+			searchUser(value) {
+				if(this.bottomText ==='新增患者'){
+					this.filterUserList = this.alreadySelectedUsers.filter((item) => {//按就诊人name和手术名称搜索
+						//函数本身返回布尔值，只有当返回值为true时，当前项存入新数组。
+						return (item.patientName&&item.patientName.match(value) != null) || (item.diagnosis&&item.diagnosis.match(value) != null)
+					})
+				}else{
+					this.filterUserList = this.docPatirntList.filter((item) => {//按就诊人name和手术名称搜索
+						//函数本身返回布尔值，只有当返回值为true时，当前项存入新数组。
+						return (item.patientName&&item.patientName.match(value) != null) || (item.diagnosis&&item.diagnosis.match(value) != null)
+					})
+				}
+				
+			},
+			btnOperation(){
+				if(this.bottomText ==='新增患者'){
+					this.filterUserList = this.docPatirntList
+					this.bottomText = '保存'
+				}else{
+					console.log('提交的list--->',this.alreadySelectedUsers.concat(this.checkUserList))
+					uni.setStorageSync('selectedUsers',this.alreadySelectedUsers.concat(this.checkUserList))
+					uni.navigateBack({
+						delta: 1
+					})
+				}
 			},
 			followUpPlanGetPatientUserByDoctor() { //医生下面的患者
 				this.api.followUpPlanGetPatientUserByDoctor('').then(res => {
 					if (res.code == 0) {
-						this.docPatirntList = res.data
-						this.filterUserList = this.docPatirntList
+						res.data.map(item => {
+							var selected = false
+							this.alreadySelectedUsers.map(userItem => { //查找userId已被选择的用户
+								if (userItem.id == item.id) {
+									selected = true
+								}
+							})
+							if(!selected){
+								this.docPatirntList.push({
+									id: item.id,
+									avatar: item.avatar,
+									diagnosis: item.diagnosis,
+									patientName: item.patientName,
+									alreadySelected: selected,
+									selectedSaved:false
+								})
+							}
+							
+						})
+						// this.docPatirntList = res.data
+						// this.filterUserList = this.docPatirntList
 					}
 					console.log(this.docPatirntList)
 				})
@@ -168,8 +225,38 @@
 
 		}
 
+		.sublimt {
+			position: fixed;
+			bottom: 0;
+			width: 60%;
+			flex-direction: column;
+			height: 88rpx;
+			background: rgba(64, 200, 222, 1);
+			border-radius: 44rpx;
+			text-align: center;
+			align-items: center;
+			line-height: 88rpx;
+			font-size: 28rpx;
+			font-family: PingFang SC;
+			font-weight: 400;
+			color: #FFFFFF;
+			margin-left: 20%;
+			margin-right: 20%;
+			margin-bottom: 10rpx;
+			z-index: 100;
+		}
+
 		.checkboxButtom {
 			margin-right: 20rpx;
+		}
+
+		.operationName {
+			width: 40%;
+			display: -webkit-box;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			-webkit-line-clamp: 1;
+			-webkit-box-orient: vertical;
 		}
 
 		.infoContainer {
