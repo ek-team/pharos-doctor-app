@@ -1,7 +1,7 @@
 # faluoshiDocApp
 
 #### Description
-法罗适医生App
+益慷护ProApp
 
 #### Software Architecture
 Software architecture description

@@ -1,7 +1,7 @@
 # faluoshiDocApp
 
 #### 介绍
-法罗适医生App
+益慷护ProApp
 
 #### 软件架构
 软件架构说明

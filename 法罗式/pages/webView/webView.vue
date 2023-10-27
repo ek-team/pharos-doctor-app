@@ -1,7 +1,7 @@
 <template>
 	<view>
-		<!-- <web-view src="https://pharos3.ewj100.com/html/privacy.html"></web-view> -->
-		<web-view src="https://pharos3.ewj100.com/html/index.html"></web-view>
+		<!-- <web-view src="http://192.168.9.20:10011/html/privacy.html"></web-view> -->
+		<web-view src="http://192.168.9.20:10011/html/index.html"></web-view>
 	</view>
 </template>
 
