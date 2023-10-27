@@ -569,9 +569,66 @@ const logoutUser = () => {//注销医生账号
 	  queryString: true
 	})
 }
+const doctorCloseService = (data) => {//关闭图文咨询
+	return service.get({
+	  url: '/doctorUserAction/closeService',
+	  data,
+	  queryString: true
+	})
+}
+const getChatAllMsgPic = (data) => {//获取聊天界面所有的图片
+	return service.get({
+	  url: '/chatMsg/queryAllMsgIMage',
+	  data,
+	  queryString: true
+	})
+}
+const getArticles = (data) => {//获取患教文章
+	return service.get({
+	  url: '/article/page',
+	  data,
+	  queryString: true
+	})
+}
+const getArticleDetail = (data) => {//获取患教文章详情
+	return service.get({
+	  url: '/article/getById',
+	  data,
+	  queryString: true
+	})
+}
+const getUserFormFilled = (data) => {//查询某一表单用户填写的数据
+	return service.get({
+	  url: '/form/pageFormUserData',
+	  data,
+	  queryString: true
+	})
+}
+const getUserFormFilledDetail = (data) => {//用户填写的表单详情根据分组id
+	return service.get({
+	  url: '/formUserData/getDataDetailByGroupId',
+	  data,
+	  queryString: true
+	})
+}
 const userReoport = (data) => {//举报内容
 	return service.post({
 	  url: '/reportRecord/save',
+	  data,
+	  queryString: true
+	})
+}
+
+const getFormDetailByGroupId = (data) => {//查询表单信息
+	return service.get({
+	  url: '/formUserData/getDataDetailByGroupId',
+	  data,
+	  queryString: true
+	})
+}
+const copyFollowUpPlan = (data) => {//复制随访计划到个人
+	return service.get({
+	  url: '/followUpPlan/copyFollowUpPlan',
 	  data,
 	  queryString: true
 	})
@@ -652,4 +709,14 @@ export default {
 	registerUser,
 	userReoport,
 	logoutUser,
+	logoutUser,
+	doctorCloseService,
+	getChatAllMsgPic,
+	getArticles,
+	getArticleDetail,
+	getUserFormFilledDetail,
+	getUserFormFilled,
+	userReoport,
+	getFormDetailByGroupId,
+	copyFollowUpPlan
 }

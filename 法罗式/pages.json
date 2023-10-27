@@ -45,8 +45,28 @@
 				
             }
             
-        }
-        ,{
+        },
+		{
+			"path": "pages/news/index",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarTextStyle":"white",
+				"navigationBarBackgroundColor":"#378EFF"
+				
+			}
+			
+		},
+		{
+			"path": "pages/news/news",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarTextStyle":"white",
+				"navigationBarBackgroundColor":"#378EFF"
+				
+			}
+			
+		},
+        {
             "path" : "pages/patient/dayPatient",
             "style" :                                                                                    
             {
@@ -471,6 +491,18 @@
 		    
 		},
 		{
+		    "path" : "pages/formInfo/formFillUser",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "已填写用户",
+		        "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#ffffff",
+				"navigationStyle": "custom"
+			
+		    }
+		    
+		},
+		{
 		    "path" : "pages/patient/searchPatient",
 		    "style" :                                                                                    
 		    {
@@ -504,8 +536,98 @@
 		       "navigationStyle": "custom" // 隐藏系统导航栏
 		   }
 		    
+		},
+		{
+		    "path" : "pages/news/newsDetail",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "文章详情",
+				"navigationBarBackgroundColor":"#ffffff",
+		        "enablePullDownRefresh": false
+		    }
+		    
 		}
+		// {
+		//     "path" : "pages/news/index",
+		//     "style" :                                                                                    
+		//     {
+		//         "navigationBarTitleText": "",
+		//         "enablePullDownRefresh": false,
+		// 		"navigationBarBackgroundColor":"#378EFF"
+				
+		//     }
+		    
+		// }
 		
+       
+        ,{
+            "path" : "pages/sufferingarticles/sufferingarticles",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "患教文章",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/sufferingarticles/articleDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "资讯详情",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/followup/followUpList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "随访计划",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        },
+		{
+		    "path" : "pages/followup/followUpDetail",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "随访计划详情",
+		        "enablePullDownRefresh": false,
+				"navigationStyle": "custom" // 隐藏系统导航栏
+		    }
+		    
+		}
+        ,{
+            "path" : "pages/followup/searchFollowUp",
+            "style" :                                                                                    
+            {
+               "navigationBarTitleText": "搜索",
+               "navigationBarBackgroundColor":"#ffffff",
+               "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/followup/editFollowUp",
+            "style" :                                                                                    
+            {
+               "navigationBarTitleText": "随访计划编辑",
+               "enablePullDownRefresh": false,
+               "navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
+        ,{
+            "path" : "pages/followup/followUpUserList",
+            "style" :                                                                                    
+            {
+               "navigationBarTitleText": "",
+               "enablePullDownRefresh": false,
+               "navigationStyle": "custom" // 隐藏系统导航栏
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#333333",
@@ -516,7 +638,7 @@
 		"fontSize": "12px",
 		"list": [
 			{
-				"text": "首页",
+				"text": "消息",
 				"pagePath": "pages/index/index",
 				"iconPath": "/static/images/index.png",
 				"selectedIconPath": "/static/images/index1.png"
@@ -526,6 +648,12 @@
 				"iconPath": "/static/images/patien.png",
 				"selectedIconPath": "/static/images/patien1.png",
 				"text": "患者管理"
+			},
+			{
+				"pagePath": "pages/news/news",
+				"iconPath": "/static/images/icon_dia@3x.png",
+				"selectedIconPath": "/static/images/icon_dia_sel@3x.png",
+				"text": "康复资讯"
 			},
 			{
 				"pagePath": "pages/my/index",

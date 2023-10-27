@@ -17,12 +17,12 @@ export default {//导出接口对象
   },
   requests(params, type) {
     let url = config.url + params.url
-	let userInfo = uni.getStorageSync('userInfoFLS'),
+	let userInfo = uni.getStorageSync('userInfoFLS'), 
       method = type,
       header = params.header || {},
       data = params.data;
     method = method.toUpperCase();
-    header['content-type'] = params.queryString ? 'application/json' : 'application/json';
+    header['content-type'] = params.queryString ? 'application/json' : 'application/json';  
 	//设置请求头
 	if(params.url.indexOf('user/register')<0){
 		

@@ -1,7 +1,7 @@
 <template>
 	<view class="flsIndex">
 		<!-- @up="upCallback" -->
-		<mescroll-body ref="mescrollRef":up="upOption" @init="mescrollInit" @down="downCallback">
+		<mescroll-body ref="mescrollRef" :up="upOption" @init="mescrollInit" @down="downCallback">
 			<view class="flsBg">
 				<view class="flsButton flex">
 					<!-- <input class="searchContianer" @input="clearSearchUser" v-model="inputName" />
@@ -162,8 +162,9 @@
 		},
 		onReachBottom: function() {
 			if (this.totals > this.noiteList.length) {
-				// console.log('到底了',this.totals,this.noiteList.length)
-				// console.log(this.pageNum)
+				console.log('到底了',this.totals,this.noiteList.length)
+				console.log(this.pageNum)
+				// this.pageNum = this.totals/this.pageSize
 				this.pageNum++
 				let page = {
 					num: this.pageNum
@@ -199,7 +200,7 @@
 					if (res.code == 0) {
 						getApp().globalData.docInfo = res.data
 						this.docInfos = res.data
-						console.log('获取医生信息' + this.docInfos.nickname)
+						console.log('获取医生信息' , this.docInfos)
 					}
 				})
 			},
@@ -240,7 +241,9 @@
 							})
 						} else {
 							uni.navigateTo({
-								url: `/pages/chat/chat?targetUid=${item.targetUid}&name=${item.nickname}&chatType=0&chatId=${item.chatUserId}&patientOtherOrderId=${res.code==0&&res.data&&res.data.patientOtherOrderStatus==1?res.data.patientOtherOrderNo:null}&serviceEndTime=${res.data.serviceEndTime}`
+								url: `/pages/chat/chat?targetUid=${item.targetUid}&name=${item.nickname}&chatType=0&chatId=${item.chatUserId}
+								&patientOtherOrderId=${res.code==0&&res.data&&res.data.patientOtherOrderStatus==1?res.data.patientOtherOrderNo:null}
+								&serviceEndTime=${res.data.serviceEndTime}&patientId=${item.patientId}`
 							})
 						}
 
@@ -252,7 +255,10 @@
 							})
 						} else {
 							uni.navigateTo({
-								url: `/pages/chat/chat?chatUserId=${item.chatUserId?item.chatUserId:0}&name=${item.nickname}&chatType=1&targetUid=${item.targetUid}&chatId=${item.chatUserId}&patientOtherOrderId=${res.code==0&&res.data&&res.data.patientOtherOrderStatus==1?res.data.patientOtherOrderNo:null}&serviceEndTime=${res.data.serviceEndTime}`
+								url: `/pages/chat/chat?chatUserId=${item.chatUserId?item.chatUserId:0}&name=${item.nickname}
+								&chatType=1&targetUid=${item.targetUid}&chatId=${item.chatUserId}
+								&patientOtherOrderId=${res.code==0&&res.data&&res.data.patientOtherOrderStatus==1?res.data.patientOtherOrderNo:null}
+								&serviceEndTime=${res.data.serviceEndTime}&patientId=${item.patientId}`
 							})
 						}
 
@@ -271,12 +277,16 @@
 				uni.navigateTo({
 					url: '/pages/systemmsg/systemmsg'
 				})
+				// uni.navigateTo({
+				// 	url: '/pages/followup/followUpList'
+				// })
 			},
 			downCallback() {
 				console.log('下拉刷新')
 				let page = {
 					num: 1
 				}
+				this.pageNum = 1
 				this.noiteList = []
 				this.upCallback(page)
 				// this.mescroll.resetUpScroll();
@@ -328,15 +338,17 @@
 						if (page.num == 1) this.noiteList = [];
 						this.noiteList = this.noiteList.concat(curPageData);
 						this.mescroll.endByPage(curPageLen, totalPage);
+						console.log('执行了 noiteList-->',this.noiteList.length)
 					} else {
-						// if (page.num == 1) {
-						// 	this.noiteList = []
-						// }
+						if (page.num == 1) {
+							this.noiteList = []
+						}
+						// this.noiteList = []
+						this.mescroll.endByPage(0, 1);
+						console.log('执行了 noiteList-->',this.noiteList.length)
 						// if (this.noiteList.length == 0) {
 						// 	this.mescroll.endByPage(0, 1);
 						// }
-						this.noiteList = []
-						this.mescroll.endByPage(0, 1);
 
 					}
 
@@ -665,6 +677,9 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
+		display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+		-webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+		-webkit-line-clamp: 1; /** 显示的行数 **/
 	}
 
 	.timeText {

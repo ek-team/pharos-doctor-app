@@ -26,6 +26,7 @@
 			if(!plus.runtime.isAgreePrivacy()){
 			    //弹出自定义隐私政策提示框
 			  }
+			
 		},
 		onShow: function() {
 			// #ifdef APP-PLUS
@@ -34,6 +35,7 @@
 			if (uni.getSystemInfoSync().platform == 'android') {
 				// 当前平台是安卓时
 				plus.runtime.getProperty(plus.runtime.appid, (widgetInfo) => {
+					this.globalData.version = widgetInfo.version  
 					let data = {
 					  version: widgetInfo.version,
 					  model: "Android"
@@ -99,6 +101,7 @@
 				})
 			} else if (uni.getSystemInfoSync().platform == 'ios') {
 				 plus.runtime.getProperty(plus.runtime.appid, (widgetInfo)=>{
+					 this.globalData.version = widgetInfo.version 
 					let data = {
 					   version: widgetInfo.version,
 					   model: "ios"
@@ -138,6 +141,31 @@
 			}
 			
 			// #endif
+			// uni-app客户端获取push客户端标记
+			uni.getPushClientId({
+				success: (res) => {
+					let push_clientid = res.cid
+					this.api.userUpdateById({
+						cid:push_clientid,
+					}).then(res=>{
+						console.log('更新用户信息',res)
+						if(res.code==0){
+							
+						}
+					})
+					console.log('客户端推送标识:',push_clientid)
+				},
+				fail(err) {
+					console.log(err)
+				}
+			}),
+			uni.onPushMessage((res)=>{
+				// uni.showToast({
+				// 	title: res,
+				// 	icon: 'none'
+				// })
+				// console.log('获取推送的消息',res)
+			}),
 			// return
 			this.api.docInfo().then(res=>{
 				if(res.code == 0){
@@ -167,14 +195,13 @@
 		},
 		onHide: function() {
 			console.log('App Hide')
-			if (this.globalData.socketObj){
-				this.globalData.socketObj.sendCloseSocket();
-				this.globalData.socketObj.closeSocket()
-				this.globalData.socketObj = null  
+			// if (this.globalData.socketObj){
+			// 	this.globalData.socketObj.sendCloseSocket();
+			// 	this.globalData.socketObj.closeSocket()
+			// 	this.globalData.socketObj = null  
 				
-				// console.log('退出')
-			}
-			
+			// 	// console.log('退出')
+			// }
 		},
 		reciveMsg(res){
 			
@@ -183,8 +210,10 @@
 			userInfo:null,//用户信息
 			docInfo:null,//医生信息
 			socketObj:null,
+			// socketUrl:'wss://api.jhxiao-school.com/ws',
 			socketUrl:'wss://pharos3.ewj100.com/ws',
 			// callback:function() {},
+			version:null
 		}
 	}
 </script>

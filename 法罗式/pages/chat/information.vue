@@ -55,8 +55,8 @@
 
 		<view class="footerContainer" v-if="showOption">
 			<view v-if="(isLeader&&groupType==1)||groupType==0" class="refuseBtn optionText" @click="confirmOption('refuse')">拒绝</view>
-			<view class="refuseBtn confirmBtn">
-				<view class="optionText" @click="confirmOption('recieve')">接收</view>
+			<view class="refuseBtn confirmBtn"@click="confirmOption('recieve')">
+				<view class="optionText" >接收</view>
 				<view >咨询费用：￥{{informationDetail.amount?informationDetail.amount:0}}</view>
 			</view>
 		</view>
@@ -128,9 +128,9 @@
 					id:this.id
 				}
 				this.api.doctorPatientOtherOrderId(data).then(res=>{
-					// console.log('图文咨询详情',res.data)
+					console.log('图文咨询详情',res.data)
 					if(res.code ==0){
-						this.informationDetail  =res.data
+						this.informationDetail =res.data
 						if(res.data.acceptStatus==0){//待接收
 							this.showOption=true
 						}else{
@@ -186,11 +186,12 @@
 									if(this.from=='chatlist'&&type!='refuse'){
 										if(this.chatType==0){
 											uni.redirectTo({
-												url:`/pages/chat/chat?targetUid=${this.targetUid}&name=${this.name}&chatType=0&chatId=${this.chatId}&patientOtherOrderId=${this.id}`
+												url:`/pages/chat/chat?targetUid=${this.targetUid}&name=${this.name}&chatType=0&chatId=${this.chatId}&patientOtherOrderId=${this.id}&patientId=${this.informationDetail.patientId}`
 											})
 										}else{
 											uni.redirectTo({
-												url:`/pages/chat/chat?chatUserId=${this.chatUserId?this.chatUserId:0}&name=${this.name}&chatType=1&targetUid=${this.targetUid}&chatId=${this.chatId}&patientOtherOrderId=${this.id}`
+												url:`/pages/chat/chat?chatUserId=${this.chatUserId?this.chatUserId:0}&name=${this.name}&chatType=1&targetUid=
+												${this.targetUid}&chatId=${this.chatId}&patientOtherOrderId=${this.id}&patientId=${this.informationDetail.patientId}`
 											})
 										}
 									}

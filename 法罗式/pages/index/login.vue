@@ -26,6 +26,8 @@
 	</view>
 </template>
 
+
+
 <script>
 	import WebSocketClass from '../../common/webSocket'
 	import Privacy from '@/components/privacy.vue'
@@ -50,7 +52,7 @@
 		methods: {
 			agreePre() {
 				this.isAgree = false
-				this.agreen = false
+				this.agreen = true
 			},
 			register() {
 				console.log('执行了')
@@ -153,7 +155,7 @@
 			background: rgba(55, 142, 255, 1);
 			margin: 40rpx auto;
 			border-radius: 20rpx;
-			font-size: 28rpx;
+			font-size: 40rpx;
 			font-family: PingFang SC;
 			font-weight: 400;
 			line-height: 88rpx;

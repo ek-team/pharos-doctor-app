@@ -6,15 +6,21 @@
 			</view>
 		</hx-navbar>
 		<mescroll-body ref="mescrollRef" @init="mescrollInit" @down="downCallback" @up="upCallback">
-			<view class="fromglList flexAB" v-for="(item,index) in fromglList" :key="index" @click="watchPatient(item)">
-				<image src="/static/images/icon_for@2x.png" mode="" class="fromglListImg" ></image>
-				<view class="flexAB" style="width:100%;">
-					<view class="fromName">
-						{{item.title}}
+			<view class="fromglList flexAB" v-for="(item,index) in fromglList" :key="index">
+				<view class="fromListContentLeft" @click="watchForm(item)">
+					<image src="/static/images/icon_form_cat.png" mode="" class="fromglListImg" ></image>
+				</view>
+				<view class="fromListContentRight flexAB" style="margin-left: 20rpx;" @click="watchPatient(item)">	
+					<image src="/static/images/icon_for@2x.png" mode="" class="fromglListImg" ></image>
+					<view class="flexAB" style="width:100%;">
+						<view class="fromName">
+							{{item.title}}
+						</view>
+						<image src="/static/images/icon_poi@2x(1).png" mode="" class="fromglListImgs"></image>
 					</view>
-					<image src="/static/images/icon_poi@2x(1).png" mode="" class="fromglListImgs"></image>
 				</view>
 			</view>
+			
 		</mescroll-body>
 	</view>
 </template>
@@ -73,6 +79,11 @@
 					})
 				}
 			},
+			watchForm(item){
+				uni.navigateTo({
+					url:`./formFillUser?id=${item.id}&operationaType=0`
+				})
+			},
 			downCallback(){
 				this.mescroll.resetUpScroll();
 			},
@@ -117,12 +128,20 @@
 		}
 	}
 	.fromglList{
-		width: 642rpx;
+		width: 85%;
 		// height: 120rpx;
 		background: rgba(255,255,255,1);
 		border-radius: 20rpx;
 		margin: 22rpx auto;
 		padding: 32rpx;
+		.fromListContentLeft{
+			width: 10%;
+			height: 100%;
+		}
+		.fromListContentRight{
+			width: 90%;
+			height: 56rpx;
+		}
 		.fromglListImg{
 			width: 56rpx;
 			height: 56rpx;

@@ -12,9 +12,10 @@
 			};
 		},
 		onLoad(options) {
-			// console.log(getApp().globalData.docInfo.id)
+			
 			
 			this.baseUrl = 'https://pharos3.ewj100.com/record.html#/ucenter/recovery/recoveryInfo?idCard='+options.idCard
+			console.log(this.baseUrl)
 			// this.baseUrl = 'https://pharos3.ewj100.com/record.html#/ucenter/recovery/comprehensiveById?userId='+getApp().globalData.docInfo.id
 		},
 	}

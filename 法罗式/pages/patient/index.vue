@@ -139,8 +139,11 @@
 				// })
 			},
 			jumpFollowUp(){
+				// uni.navigateTo({
+				// 	url:'./followUp'
+				// })
 				uni.navigateTo({
-					url:'./followUp'
+					url:'/pages/followup/followUpList?pageType=0'
 				})
 			},
 		},

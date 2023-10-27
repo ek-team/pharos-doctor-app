@@ -99,6 +99,11 @@
 			console.log(JSON.parse(option.data))
 			let formData = JSON.parse(option.data)
 			this.form = {...this.form,...formData}
+			if(this.form.sex == 1){
+				this.formIndex = 0
+			}else{
+				this.formIndex = 1
+			}
 		},
 		methods:{
 			bindPickerChange(e){

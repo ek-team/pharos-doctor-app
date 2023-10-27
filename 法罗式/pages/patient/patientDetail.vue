@@ -173,7 +173,10 @@
 
 					<view class="itemContent">
 						<text>有效时间</text>
-						<input cols="20" type="number" v-model="hour" placeholder="请输入会话有效时间" class="textaInfo" />
+						<view class="hoursViewInfo" @click="showHours = !showHours">
+							{{hour == null?'请选择会话有效时间':hour}}
+						</view>
+						<!-- <input cols="20" type="number" v-model="hour" placeholder="请输入会话有效时间" class="textaInfo" /> -->
 						<text>(小时)</text>
 					</view>
 				</view>
@@ -182,7 +185,9 @@
 					<button type="primary" size="mini" @click="openChat">确定</button>
 				</view>
 			</view>
-
+			<u-picker :show="showHours" ref="uPicker" :columns="hoursList" @confirm="bindSelectHoursChange"
+				@close="showHours=!showHours" @cancel="showHours = !showHours"
+				@change="bindHoursPickerChange"></u-picker>
 		</u-popup>
 		<!-- 添加分组 -->
 		<u-popup :show="groupsShow" mode="center" :round="10" @close="groupsShow = false">
@@ -261,6 +266,8 @@
 				addGoupsShow: false,
 				checkGroupIds: [],
 				inputGroupName: null,
+				showHours: false,
+				hoursList: [[]]
 			};
 		},
 		onLoad(option) {
@@ -272,6 +279,9 @@
 			} else {
 				this.teamId = null
 			}
+			for (var i = 0; i < 24; i++) {
+				this.hoursList[0][i] = i+1
+			}
 
 			this.followUpPlanGetPatientDetail()
 			this.getFormList()
@@ -282,6 +292,16 @@
 			// console.log('销毁')
 		},
 		methods: {
+			bindHoursPickerChange(e) {
+				// this.hour = e.value
+				// this.showHours = false
+				// console.log(this.hour)
+			},
+			bindSelectHoursChange(e) {
+				this.hour = e.value[0]
+				this.showHours = false
+				console.log(this.hour)
+			},
 			getFormList() {
 				this.api.formUserDataGetDataByFormId({
 					userId: this.id
@@ -831,6 +851,15 @@
 			padding: 8rpx 20rpx;
 		}
 
+		.hoursViewInfo {
+			width: 260rpx;
+			height: 30rpx;
+			border: 1px solid #cacaca;
+			margin: 0 20rpx;
+			padding: 8rpx 20rpx;
+			font-size: small;
+		}
+
 		.textContent {
 			width: 500rpx;
 		}
@@ -849,8 +878,8 @@
 		width: 600rpx;
 		padding: 20rpx;
 		border-radius: 10rpx;
-	
-	.centerTitle {
+
+		.centerTitle {
 			display: flex;
 			justify-content: center;
 			font-size: 17px;

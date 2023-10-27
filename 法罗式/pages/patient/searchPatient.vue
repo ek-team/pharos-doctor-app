@@ -66,7 +66,7 @@
 			toChat(item){
 				// let chatType=this.teamId?1:0 //0单聊1群聊
 				uni.navigateTo({
-					url:'../chat/chat?targetUid='+item.id+'&name='+item.patientName+'&chatType=0' //0单聊1群聊
+					url:'../chat/chat?targetUid='+item.id+'&name='+item.patientName+'&chatType=0' +'&patientId='+item.patientId//0单聊1群聊
 				})
 			},
 			toPatientList(item){

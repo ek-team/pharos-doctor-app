@@ -7,7 +7,7 @@
 				<view class="" @click="asublimtFolow">
 					提交
 				</view>
-			</view>
+			</view>z
 		</hx-navbar>
 		<view class="flexAB follow" @click="editFollow('editName')">
 			<view class="name flexA">

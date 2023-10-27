@@ -47,11 +47,11 @@
 			};
 		},
 		methods:{
-			// chat(item){
-			// 	uni.navigateTo({
-			// 		url:`/pages/plant/detail?id=${item.followUpPlanContentId}`
-			// 	})
-			// }
+			chat(item){
+				// uni.navigateTo({
+				// 	url:`/pages/plant/detail?id=${item.followUpPlanContentId}`
+				// })
+			}
 		}
 	}
 </script>

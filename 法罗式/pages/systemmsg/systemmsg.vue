@@ -49,7 +49,8 @@
 					rightSlot:true,
 				},
 				businessList:[],
-				pageNum:1
+				pageNum:1,
+				pageSize:10
 			};
 		},
 		onLoad() {
