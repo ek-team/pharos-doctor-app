@@ -1,8 +1,8 @@
 let config = {
-	url:'http://192.168.9.20:10011'
+	url:'https://home.ekang.tech'
 	// url:'https://api.jhxiao-school.com'
 }
-// http://192.168.9.20:10011/oauth/token?username=admin&password=pharosbto1&randomStr=55711671529860129&code=&grant_type=password
+// https://home.ekang.tech/oauth/token?username=admin&password=pharosbto1&randomStr=55711671529860129&code=&grant_type=password
 let requestStatus = true //防止接口重复 true允许请求，false不允许
 
 	

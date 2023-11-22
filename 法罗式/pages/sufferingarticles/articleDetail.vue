@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<view class="title">{{detail.title}}</view>
-		<view v-if="isShow" style="margin-left: 20rpx;margin-top: 40rpx;">益慷护Pro  {{date}}</view>
+		<view v-if="isShow" style="margin-left: 20rpx;margin-top: 40rpx;">益慷医生  {{date}}</view>
 		<!-- <image style="width: 100%;height: 400rpx;margin-top: 40rpx;" :src="imgPath"></image> -->
 		<!-- <view class="textContent">{{textContent}}</view> -->
 		<u-parse class="textContent" style="background: white;" :content="detail.content" >

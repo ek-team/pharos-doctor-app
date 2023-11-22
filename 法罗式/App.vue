@@ -211,7 +211,7 @@
 			docInfo:null,//医生信息
 			socketObj:null,
 			// socketUrl:'wss://api.jhxiao-school.com/ws',
-			socketUrl:'ws://192.168.9.10:8071/ws',
+			socketUrl:'wss://home.lifwatch.com/ws',
 			// callback:function() {},
 			version:null
 		}

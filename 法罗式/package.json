@@ -19,7 +19,7 @@
 					"title": "正式版",
 					"env": {
 						"UNI_PLATFORM": "mp-weixin",
-						"VUE_APP_BASE_URL":"http://192.168.9.20:10011"
+						"VUE_APP_BASE_URL":"https://home.ekang.tech"
 					}
 				}
 			}

@@ -1,9 +1,9 @@
 {
-    "name" : "益慷护Pro",
+    "name" : "益慷医生",
     "appid" : "__UNI__F9D16A5",
     "description" : "",
-    "versionName" : "1.6.4",
-    "versionCode" : 164,
+    "versionName" : "1.0.1",
+    "versionCode" : 101,
     "transformPx" : false,
     /* 5+App特有相关 */
     "app-plus" : {
@@ -55,7 +55,8 @@
                     "NSLocalNetworkUsageDescription" : "",
                     "NSPhotoLibraryUsageDescription" : "适用于医生上传诊断书以及聊天时选择发送图片",
                     "NSCameraUsageDescription" : "适用于使用摄像头拍照上传图片以及拍照上传诊断结果"
-                }
+                },
+                "idfa" : false
             },
             "icons" : {
                 "android" : {
@@ -93,7 +94,13 @@
                 "useOriginalMsgbox" : true
             },
             "sdkConfigs" : {
-                "ad" : {}
+                "ad" : {},
+                "push" : {
+                    "unipush" : {
+                        "version" : "2",
+                        "offline" : false
+                    }
+                }
             }
         }
     },

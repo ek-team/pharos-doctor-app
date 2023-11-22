@@ -14,9 +14,9 @@
 		onLoad(options) {
 			
 			
-			this.baseUrl = 'http://192.168.9.20:10011/record.html#/ucenter/recovery/recoveryInfo?idCard='+options.idCard
+			this.baseUrl = 'https://home.ekang.tech/record.html#/ucenter/recovery/recoveryInfo?idCard='+options.idCard
 			console.log(this.baseUrl)
-			// this.baseUrl = 'http://192.168.9.20:10011/record.html#/ucenter/recovery/comprehensiveById?userId='+getApp().globalData.docInfo.id
+			// this.baseUrl = 'https://home.ekang.tech/record.html#/ucenter/recovery/comprehensiveById?userId='+getApp().globalData.docInfo.id
 		},
 	}
 </script>

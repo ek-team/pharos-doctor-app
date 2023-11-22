@@ -645,7 +645,7 @@
 						/* 上传图片 */
 						const uploadTask = uni.uploadFile({
 							// url : 'https://api.jhxiao-school.com/file/upload',
-							url: 'http://192.168.9.20:10011/file/upload',
+							url: 'https://home.ekang.tech/file/upload',
 							filePath: tempFilePaths[0],
 							fileType: 'image',
 							methods: 'post',
@@ -676,7 +676,7 @@
 						// return
 						const uploadTask = uni.uploadFile({
 							// url : 'https://api.jhxiao-school.com/file/upload',
-							url: 'http://192.168.9.20:10011/file/upload',
+							url: 'https://home.ekang.tech/file/upload',
 							filePath: res.tempFilePath,
 							methods: 'post',
 							name: 'file',
@@ -941,7 +941,7 @@
 					console.log('录音停止并上传')
 					var src = res.tempFilePath; //语音临时文件
 					uni.uploadFile({
-						url: 'http://192.168.9.20:10011/file/upload',
+						url: 'https://home.ekang.tech/file/upload',
 						name: "file",
 						filePath: src, //filePath只能是String
 						// fileType:'image',

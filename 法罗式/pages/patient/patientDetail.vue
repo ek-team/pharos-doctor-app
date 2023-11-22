@@ -147,7 +147,7 @@
 				</view>
 			</view>
 		</view> -->
-		<!-- <web-view  :webview-styles="webviewStyles" src="http://192.168.9.20:10011/record.html#/ucenter/recovery/comprehensiveById?userId=1" ></web-view> -->
+		<!-- <web-view  :webview-styles="webviewStyles" src="https://home.ekang.tech/record.html#/ucenter/recovery/comprehensiveById?userId=1" ></web-view> -->
 		<!-- 备注信息 -->
 		<u-popup :show="reMarkShow" mode="center" @close="reMarkShow = false">
 			<view class="popupContainer">

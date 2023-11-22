@@ -20,7 +20,7 @@
 					class="changeIcon" mode=""></image>
 				同意
 			</view>
-			<text @click="isAgree = true">《益慷护Pro隐私政策》</text>
+			<text @click="isAgree = true">《益慷医生隐私政策》</text>
 		</view>
 		<Privacy v-if="isAgree" @agreePre="agreePre"></Privacy>
 	</view>
@@ -122,7 +122,7 @@
 					})
 				} else {
 					uni.showToast({
-						title: '请阅读并同意益慷护Pro用户协议与隐私政策',
+						title: '请阅读并同意益慷医生用户协议与隐私政策',
 						icon: 'none'
 					})
 				}

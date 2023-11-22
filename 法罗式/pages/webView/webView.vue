@@ -1,7 +1,7 @@
 <template>
 	<view>
-		<!-- <web-view src="http://192.168.9.20:10011/html/privacy.html"></web-view> -->
-		<web-view src="http://192.168.9.20:10011/html/index.html"></web-view>
+		<!-- <web-view src="https://home.ekang.tech/html/privacy.html"></web-view> -->
+		<web-view src="https://home.ekang.tech/html/index.html"></web-view>
 	</view>
 </template>
 

@@ -170,7 +170,7 @@
 						console.log(tempFilePaths[0])
 						/* 上传图片 */
 						const uploadTask = uni.uploadFile({
-							  url : 'http://192.168.9.20:10011/file/upload',
+							  url : 'https://home.ekang.tech/file/upload',
 							  filePath: tempFilePaths[0],
 							  fileType: 'image',
 							  methods: 'post',
