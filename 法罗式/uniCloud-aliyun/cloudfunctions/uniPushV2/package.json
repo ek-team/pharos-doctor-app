@@ -1,7 +1,0 @@
-{
-  "name": "uniPushV2",
-  "dependencies": {},
-  "extensions": {
-    "uni-cloud-push": {}
-  }
-}

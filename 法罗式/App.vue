@@ -141,31 +141,6 @@
 			}
 			
 			// #endif
-			// uni-app客户端获取push客户端标记
-			uni.getPushClientId({
-				success: (res) => {
-					let push_clientid = res.cid
-					this.api.userUpdateById({
-						cid:push_clientid,
-					}).then(res=>{
-						console.log('更新用户信息',res)
-						if(res.code==0){
-							
-						}
-					})
-					console.log('客户端推送标识:',push_clientid)
-				},
-				fail(err) {
-					console.log(err)
-				}
-			}),
-			uni.onPushMessage((res)=>{
-				// uni.showToast({
-				// 	title: res,
-				// 	icon: 'none'
-				// })
-				// console.log('获取推送的消息',res)
-			}),
 			// return
 			this.api.docInfo().then(res=>{
 				if(res.code == 0){
@@ -211,7 +186,7 @@
 			docInfo:null,//医生信息
 			socketObj:null,
 			// socketUrl:'wss://api.jhxiao-school.com/ws',
-			socketUrl:'wss://home.lifwatch.com/ws',
+			socketUrl:'wss://home.ekang.tech/ws',
 			// callback:function() {},
 			version:null
 		}
