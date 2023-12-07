@@ -2,8 +2,8 @@
     "name" : "益慷医生",
     "appid" : "__UNI__F9D16A5",
     "description" : "",
-    "versionName" : "1.0.1",
-    "versionCode" : 101,
+    "versionName" : "1.0.4",
+    "versionCode" : 104,
     "transformPx" : false,
     /* 5+App特有相关 */
     "app-plus" : {
@@ -23,7 +23,8 @@
         "modules" : {
             "VideoPlayer" : {},
             "Camera" : {},
-            "Record" : {}
+            "Record" : {},
+            "Push" : {}
         },
         /* 应用发布信息 */
         "distribute" : {
@@ -94,7 +95,14 @@
                 "useOriginalMsgbox" : true
             },
             "sdkConfigs" : {
-                "ad" : {}
+                "ad" : {},
+                "push" : {
+                    "unipush" : {
+                        "version" : "2",
+                        "offline" : true,
+                        "hms" : {}
+                    }
+                }
             }
         }
     },
@@ -133,7 +141,11 @@
     },
     "vueVersion" : "2",
     "locale" : "auto",
-    "h5" : {}
+    "h5" : {
+        "unipush" : {
+            "enable" : true
+        }
+    }
 }
 /* 快应用特有相关 *//* 小程序特有相关 */
 
