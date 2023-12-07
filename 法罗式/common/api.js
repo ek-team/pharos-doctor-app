@@ -709,14 +709,12 @@ export default {
 	registerUser,
 	userReoport,
 	logoutUser,
-	logoutUser,
 	doctorCloseService,
 	getChatAllMsgPic,
 	getArticles,
 	getArticleDetail,
 	getUserFormFilledDetail,
 	getUserFormFilled,
-	userReoport,
 	getFormDetailByGroupId,
 	copyFollowUpPlan
 }
