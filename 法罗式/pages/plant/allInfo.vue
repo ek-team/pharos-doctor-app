@@ -53,7 +53,7 @@
 			deytail(item){
 				console.log(item)
 				uni.navigateTo({
-					url:`./detail?id=${item.id}`
+					url:`./detail?id=${item.followUpPlanContentId}`
 				})
 			},
 			followUpPlanGetPatientAllPlan(){
