@@ -76,7 +76,7 @@
 						if (res.code == 0) {
 							uni.setStorageSync('userInfoFLS', res.data)
 							getApp().globalData.userInfo = res.data
-							console.log('用户信息--->'+res.data)
+							console.log('用户信息--->', res.data)
 							this.api.docInfo().then(res => {
 								if (res.code == 0) {
 

@@ -1,28 +1,30 @@
 {
 	"uni-app": {
-			"scripts": {
-				"dev": {
-					"title": "开发版",
-					"env": {
-						"UNI_PLATFORM": "mp-weixin",
-						"VUE_APP_BASE_URL":"https://api.jhxiao-school.com"
-					}
-				},
-				"pre": {
-					"title": "测试版",
-					"env": {
-						"UNI_PLATFORM": "mp-weixin",
-						"VUE_APP_BASE_URL":"https://api.jhxiao-school.com"
-					}
-				},
-				"prod": {
-					"title": "正式版",
-					"env": {
-						"UNI_PLATFORM": "mp-weixin",
-						"VUE_APP_BASE_URL":"https://home.ekang.tech"
-					}
+		"scripts": {
+			"dev": {
+				"title": "开发版",
+				"env": {
+					"UNI_PLATFORM": "mp-weixin",
+					"VUE_APP_BASE_URL": "https://api.jhxiao-school.com"
+				}
+			},
+			"pre": {
+				"title": "测试版",
+				"env": {
+					"UNI_PLATFORM": "mp-weixin",
+					"VUE_APP_BASE_URL": "https://api.jhxiao-school.com"
+				}
+			},
+			"prod": {
+				"title": "正式版",
+				"env": {
+					"UNI_PLATFORM": "mp-weixin",
+					"VUE_APP_BASE_URL": "https://home.ekang.tech"
 				}
 			}
 		}
-
+	},
+	"dependencies": {
+		"uview-ui": "^2.0.36"
+	}
 }

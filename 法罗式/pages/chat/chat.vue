@@ -400,7 +400,7 @@
 			// myVideo
 		},
 		onLoad(option) {
-			// console.log('option',option)
+			console.log('option',option)
 			this.chatId = option.chatId
 			this.targetUid = option.targetUid //患者id
 			this.chatUserId = option.chatUserId //群聊id
@@ -607,7 +607,7 @@
 			},
 			// 查看患者详情
 			toPatientDetail(item) {
-				console.log('患者详情', this.targetUid, item.fromUid)
+				console.log('患者详情', this.targetUid, item.fromUid, this.patientId)
 				// return
 				if (this.targetUid == item.fromUid) {
 					this.offSocker()

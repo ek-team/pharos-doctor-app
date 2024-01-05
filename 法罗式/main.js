@@ -11,6 +11,7 @@ Vue.use(uView);
 import hxNavbar from "./components/hx-navbar/hx-navbar"
 Vue.config.productionTip = false
 Vue.prototype.api = api //全局挂在自定义方法
+Vue.prototype.uni = uni
 App.mpType = 'app'
 const app = new Vue({
     ...App

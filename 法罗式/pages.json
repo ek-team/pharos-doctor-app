@@ -627,6 +627,14 @@
                "navigationStyle": "custom" // 隐藏系统导航栏
             }
             
+        },
+        {
+        	"path" : "pages/balancing/balancing",
+        	"style" : 
+        	{
+        		"navigationBarTitleText" : "平衡仪",
+        		"enablePullDownRefresh" : false
+        	}
         }
     ],
 	"tabBar": {

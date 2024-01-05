@@ -2,6 +2,7 @@
     "version" : "1.0",
     "configurations" : [
         {
+            "openVueDevtools" : true,
             "playground" : "custom",
             "type" : "uni-app:app-android"
         },
@@ -18,6 +19,7 @@
             "type" : "uniCloud"
         },
         {
+            "openVueDevtools" : true,
             "playground" : "custom",
             "type" : "uni-app:app-ios"
         }

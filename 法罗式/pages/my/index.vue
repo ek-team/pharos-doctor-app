@@ -43,27 +43,6 @@
 				</view>
 				<image src="/static/images/icon_poi@2x(1).png" mode="" class="menuListIcons"></image>
 			</view>
-			<!-- <view class="menuList flexAB" >
-				<view class="flexA">
-					<image src="/static/images/icon_set@2x1.png" mode="" class="menuListIcon"></image>
-					法豆明细
-				</view>
-				<image src="/static/images/icon_poi@2x(1).png" mode="" class="menuListIcons"></image>
-			</view> -->
-			<!-- <view class="menuList flexAB">
-				<view class="flexA">
-					<image src="/static/images/icon_hel@2x.png" mode="" class="menuListIcon"></image>
-					帮助
-				</view>
-				<image src="/static/images/icon_poi@2x(1).png" mode="" class="menuListIcons"></image>
-			</view> -->
-			<!-- <view class="menuList flexAB">
-				<view class="flexA">
-					<image src="/static/images/icon_opi@2x.png" mode="" class="menuListIcon"></image>
-					意见反馈
-				</view>
-				<image src="/static/images/icon_poi@2x(1).png" mode="" class="menuListIcons"></image>
-			</view> -->
 			<view class="menuList flexAB" @click="ysxy">
 				<view class="flexA">
 					<image src="/static/images/icon_con@2x.png" mode="" class="menuListIcon"></image>

@@ -42,6 +42,12 @@
 					锻炼数据
 				</view>
 			</view>
+			<view class="" @click="uni.navigateTo({url: `../balancing/balancing?userId=${patirntInfo.tbTrainUser.userId}`})">
+				<image src="/static/images/cfc8171251f935b82109e3c78f8a737.png" mode="" class="medicalRecordImg"></image>
+				<view class="medicalRecordText">
+					平衡训练
+				</view>
+			</view>
 			<!-- <view class="medicalRecordInfo flex">
 				<view class="" style="margin-top:20rpx;">
 					最新记录：{{patirntInfo.electronicCase.createTime}}
@@ -322,6 +328,7 @@
 			},
 			// 查看用户数据
 			watchBB() {
+				console.log('查看用户数据',this.patirntInfo);
 				uni.navigateTo({
 					url: '../plant/reportWebView?idCard=' + this.patirntInfo.idCard
 				})

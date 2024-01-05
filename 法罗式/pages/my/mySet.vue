@@ -20,6 +20,9 @@
 			</view>
 		</view>
 		<!-- #endif -->
+		<view class="infoBox">
+			备案号：沪ICP备2023030857号-5A
+		</view>
 		<!-- <view class="logout" @click="exit">
 			退出登录
 		</view> -->
